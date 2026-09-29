@@ -1,0 +1,7 @@
+<section class="resume-page page-wrap" aria-labelledby="resume-title">
+  <div class="resume-heading">
+    <div><p class="eyebrow">Professional profile</p><h1 id="resume-title">Résumé</h1><p>{{ profile.name }} · {{ profile.title }} · {{ profile.location }}</p></div>
+    <a class="button button--primary" [href]="profile.resumeUrl" download>Download PDF <span aria-hidden="true">&#8595;</span></a>
+  </div>
+  <div class="resume-frame"><iframe [src]="resumePdfUrl" [title]="profile.name + ' résumé PDF'" loading="lazy"></iframe></div>
+</section>

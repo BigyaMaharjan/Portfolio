@@ -1,0 +1,15 @@
+.case-page { padding-block: 56px 100px; }
+.back-link { display: inline-block; margin-bottom: 42px; color: var(--text-secondary); text-decoration: none; }
+.case-page h1 { max-width: 900px; margin: 18px 0; font-family: var(--font-display); font-size: clamp(48px, 9vw, 100px); line-height: .98; }
+.case-intro { max-width: 720px; margin: 0 0 56px; color: var(--text-secondary); font-size: 20px; line-height: 1.6; }
+.case-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; border: 1px solid var(--border); background: var(--border); }
+.case-grid section { min-height: 180px; padding: 28px; background: var(--surface); }
+.case-grid h2 { margin: 0 0 14px; font-family: var(--font-display); font-size: 18px; }
+.case-grid p, .case-grid li { color: var(--text-secondary); line-height: 1.7; }
+.case-grid small { display: block; margin-top: 8px; }
+.case-links { display: flex; gap: 20px; margin-top: 24px; }
+.case-links a { color: var(--accent); }
+.case-empty { max-width: 690px; padding-block: 12vh 20vh; }
+.case-empty h1 { font-size: clamp(42px, 7vw, 72px); }
+.case-empty > p:not(.eyebrow) { margin-bottom: 28px; color: var(--text-secondary); font-size: 17px; line-height: 1.7; }
+@media (max-width: 680px) { .case-grid { grid-template-columns: 1fr; } .case-grid section { min-height: 0; padding: 22px; } }
