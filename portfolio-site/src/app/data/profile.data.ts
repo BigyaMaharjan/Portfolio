@@ -1,4 +1,4 @@
-import type { CapabilityGroup, Experience, Profile, Project } from './portfolio.models';
+import type { Profile } from './portfolio.models';
 
 export const profile: Profile = {
   name: 'Bigya Maharjan',
@@ -34,38 +34,3 @@ export const approachSteps = [
     description: 'Learn from how systems behave and make the next change better.'
   }
 ] as const;
-
-export const projects: readonly Project[] = [];
-
-export const experience: readonly Experience[] = [];
-
-export const experienceSectors = ['Banking', 'Telecom', 'Government', 'SaaS'] as const;
-
-export const systemTypes = [
-  'Automated recharge',
-  'Workflows',
-  'Reporting',
-  'Vouchers',
-  'Enterprise applications'
-] as const;
-
-export const capabilityGroups: readonly CapabilityGroup[] = [
-  {
-    id: 'backend-api',
-    title: 'Backend & API design',
-    summary: 'Building service behavior and interfaces with .NET.',
-    items: ['C#', '.NET', 'APIs & platform engineering']
-  },
-  {
-    id: 'distributed-data',
-    title: 'Data, messaging & distributed systems',
-    summary: 'Working with connected services, background workflows, and reporting systems.',
-    items: ['Distributed systems', 'Microservices', 'Background workflows', 'Reporting']
-  },
-  {
-    id: 'domains',
-    title: 'Product domains',
-    summary: 'Experience across varied business and public-service environments.',
-    items: ['FinTech', 'Banking', 'Telecom', 'Government', 'SaaS']
-  }
-];

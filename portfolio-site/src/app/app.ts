@@ -5,7 +5,8 @@ import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
 import { MotionPreferenceService } from './core/motion-preference.service';
 import { ThemePreferenceService } from './core/theme-preference.service';
-import { profile, projects } from './data/profile.data';
+import { profile } from './data/profile.data';
+import { projects } from './data/projects.data';
 
 @Component({
   selector: 'app-root',

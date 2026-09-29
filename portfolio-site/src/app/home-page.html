@@ -81,8 +81,13 @@
         <article class="project-card" data-reveal>
           <p class="project-card__eyebrow">{{ project.eyebrow }}</p>
           <h3>{{ project.name }}</h3>
+          <p class="project-card__category">{{ project.category }}</p>
           <p class="project-card__summary">{{ project.oneLiner }}</p>
+          <p class="project-card__role"><span>My role</span> {{ project.role }}</p>
           <div class="tag-list">@for (tag of project.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div>
+          @if (project.outcomes.length > 0) {
+            <div class="project-card__outcomes">@for (outcome of project.outcomes.slice(0, 2); track outcome.label) { <p><strong>{{ outcome.value }}</strong><span>{{ outcome.label }}</span></p> }</div>
+          }
           <a class="text-link" [routerLink]="['/work', project.slug]">Read case study <span aria-hidden="true">&#8594;</span></a>
         </article>
       }

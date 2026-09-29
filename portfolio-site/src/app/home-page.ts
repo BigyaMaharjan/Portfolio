@@ -2,7 +2,10 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestro
 import { RouterLink } from '@angular/router';
 import { animate, stagger } from 'animejs';
 import { MotionPreferenceService } from './core/motion-preference.service';
-import { capabilityGroups, experience, experienceSectors, profile, projects, systemTypes } from './data/profile.data';
+import { capabilityGroups } from './data/capabilities.data';
+import { experience, experienceSectors, systemTypes } from './data/experience.data';
+import { profile } from './data/profile.data';
+import { projects } from './data/projects.data';
 
 @Component({
   selector: 'app-home-page',
