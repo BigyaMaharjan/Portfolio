@@ -1,11 +1,60 @@
 <section class="case-page page-wrap" aria-labelledby="case-title">
   @if (project(); as item) {
     <a class="back-link" routerLink="/" fragment="work">&#8592; All work</a>
-    <p class="eyebrow">{{ item.eyebrow }} <span aria-hidden="true">·</span> {{ item.confidentiality }}</p>
-    <h1 id="case-title">{{ item.name }}</h1>
-    <p class="case-intro">{{ item.oneLiner }}</p>
-    <div class="case-grid"><section><h2>Challenge</h2><p>{{ item.problem }}</p></section><section><h2>My role</h2><p>{{ item.role }}</p></section><section><h2>Architecture</h2><p>{{ item.architecture }}</p></section><section><h2>Engineering decisions</h2><ul>@for (decision of item.decisions; track decision) { <li>{{ decision }}</li> }</ul></section><section><h2>Outcomes</h2>@for (outcome of item.outcomes; track outcome.label) { <p><strong>{{ outcome.value }}</strong> {{ outcome.label }} <small>{{ outcome.note }}</small></p> }</section><section><h2>Stack</h2><div class="tag-list">@for (item of item.stack; track item) { <span class="tag">{{ item }}</span> }</div></section></div>
-    <nav class="case-links" aria-label="Project links">@if (item.githubUrl) { <a [href]="item.githubUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">&#8599;</span></a> }@if (item.liveUrl) { <a [href]="item.liveUrl" target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">&#8599;</span></a> }</nav>
+    <header class="case-hero">
+      <p class="eyebrow">{{ item.eyebrow }} <span aria-hidden="true">·</span> {{ item.category }}</p>
+      <h1 id="case-title">{{ item.name }}</h1>
+      <p class="case-intro">{{ item.oneLiner }}</p>
+      <div class="case-hero__meta">
+        <div><span>My role</span><strong>{{ item.role }}</strong></div>
+        @if (item.timeframe) { <div><span>Timeframe</span><strong>{{ item.timeframe }}</strong></div> }
+        <div><span>Confidentiality</span><strong>{{ item.confidentiality }}</strong></div>
+      </div>
+      <nav class="case-links" aria-label="Project links">
+        @if (item.githubUrl) { <a [href]="item.githubUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">&#8599;</span></a> }
+        @if (item.liveUrl) { <a [href]="item.liveUrl" target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">&#8599;</span></a> }
+      </nav>
+    </header>
+
+    <div class="case-grid">
+      <section class="case-section"><p class="eyebrow">01 / Context</p><h2>Challenge</h2><p>{{ item.context }}</p><p>{{ item.problem }}</p>@if (item.baseline) { <p class="case-baseline"><span>Baseline / constraints</span>{{ item.baseline }}</p> }</section>
+      <section class="case-section case-section--wide"><p class="eyebrow">02 / System design</p><h2>Architecture</h2><p>{{ item.architecture }}</p>
+        <figure class="architecture-figure">
+          <svg [attr.viewBox]="'0 0 ' + item.architectureDiagram.width + ' ' + item.architectureDiagram.height" role="img" aria-labelledby="architecture-title architecture-description">
+            <title id="architecture-title">{{ item.architectureDiagram.title }}</title>
+            <desc id="architecture-description">{{ item.architectureDiagram.description }}</desc>
+            @for (edge of item.architectureDiagram.edges; track edge.id) {
+              <line class="architecture-edge" [attr.x1]="edge.x1" [attr.y1]="edge.y1" [attr.x2]="edge.x2" [attr.y2]="edge.y2" />
+              @if (edge.label) { <text class="architecture-edge__label" [attr.x]="(edge.x1 + edge.x2) / 2" [attr.y]="(edge.y1 + edge.y2) / 2 - 8">{{ edge.label }}</text> }
+            }
+            @for (node of item.architectureDiagram.nodes; track node.id) {
+              <g [class]="'architecture-node architecture-node--' + node.kind">
+                <rect [attr.x]="node.x" [attr.y]="node.y" [attr.width]="node.width" [attr.height]="node.height" rx="12" />
+                <text class="architecture-node__label" [attr.x]="node.x + node.width / 2" [attr.y]="node.y + node.height / 2 - (node.detail ? 4 : -4)">{{ node.label }}</text>
+                @if (node.detail) { <text class="architecture-node__detail" [attr.x]="node.x + node.width / 2" [attr.y]="node.y + node.height / 2 + 15">{{ node.detail }}</text> }
+              </g>
+            }
+          </svg>
+          <figcaption>{{ item.architectureDiagram.caption }}</figcaption>
+        </figure>
+      </section>
+      <section class="case-section"><p class="eyebrow">03 / Trade-offs</p><h2>Engineering decisions</h2>
+        @for (decision of item.decisions; track decision.title) {
+          <article class="decision-item"><h3>{{ decision.title }}</h3><p>{{ decision.choice }}</p><p><span>Trade-off</span> {{ decision.tradeoff }}</p></article>
+        }
+      </section>
+      <section class="case-section"><p class="eyebrow">04 / Delivery</p><h2>Execution</h2><p>{{ item.execution }}</p></section>
+      @if (item.outcomes.length > 0) {
+        <section class="case-section case-section--wide"><p class="eyebrow">05 / Evidence</p><h2>Outcomes</h2><div class="case-outcomes">@for (outcome of item.outcomes; track outcome.label) { <article><strong>{{ outcome.value }}</strong><h3>{{ outcome.label }}</h3><p>{{ outcome.note }}</p></article> }</div></section>
+      }
+      @if (item.lessons) { <section class="case-section"><p class="eyebrow">06 / Reflection</p><h2>Lessons</h2><p>{{ item.lessons }}</p></section> }
+      <section class="case-section"><p class="eyebrow">{{ item.outcomes.length > 0 ? '07' : '05' }} / Tools</p><h2>Stack</h2><div class="tag-list">@for (tag of item.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div></section>
+    </div>
+
+    @if (relatedProjects().length > 0) {
+      <section class="related-work" aria-labelledby="related-title"><p class="eyebrow">Continue exploring</p><h2 id="related-title">Related work</h2><div>@for (related of relatedProjects(); track related.slug) { <a class="related-work__link" [routerLink]="['/work', related.slug]">{{ related.name }} <span aria-hidden="true">&#8594;</span></a> }</div></section>
+    }
+    <section class="case-contact"><h2>Have a system that needs a closer look?</h2><a class="button button--primary" routerLink="/" fragment="contact">Let's talk <span aria-hidden="true">&#8599;</span></a></section>
   } @else {
     <div class="case-empty"><p class="eyebrow">Case study unavailable</p><h1 id="case-title">This project isn't published yet.</h1><p>Project details are only shown once they're ready to share. Nothing has been filled with placeholder employers, metrics, or architecture claims.</p><a class="button button--primary" routerLink="/" fragment="work">Back to selected work <span aria-hidden="true">&#8594;</span></a></div>
   }
