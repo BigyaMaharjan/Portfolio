@@ -47,6 +47,11 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/files",
+                "output": "files"
               }
             ],
             "styles": [

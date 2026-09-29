@@ -1,0 +1,12 @@
+<section class="case-page page-wrap" aria-labelledby="case-title">
+  @if (project(); as item) {
+    <a class="back-link" routerLink="/" fragment="work">&#8592; All work</a>
+    <p class="eyebrow">{{ item.eyebrow }} <span aria-hidden="true">·</span> {{ item.confidentiality }}</p>
+    <h1 id="case-title">{{ item.name }}</h1>
+    <p class="case-intro">{{ item.oneLiner }}</p>
+    <div class="case-grid"><section><h2>Challenge</h2><p>{{ item.problem }}</p></section><section><h2>My role</h2><p>{{ item.role }}</p></section><section><h2>Architecture</h2><p>{{ item.architecture }}</p></section><section><h2>Engineering decisions</h2><ul>@for (decision of item.decisions; track decision) { <li>{{ decision }}</li> }</ul></section><section><h2>Outcomes</h2>@for (outcome of item.outcomes; track outcome.label) { <p><strong>{{ outcome.value }}</strong> {{ outcome.label }} <small>{{ outcome.note }}</small></p> }</section><section><h2>Stack</h2><div class="tag-list">@for (item of item.stack; track item) { <span class="tag">{{ item }}</span> }</div></section></div>
+    <nav class="case-links" aria-label="Project links">@if (item.githubUrl) { <a [href]="item.githubUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">&#8599;</span></a> }@if (item.liveUrl) { <a [href]="item.liveUrl" target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">&#8599;</span></a> }</nav>
+  } @else {
+    <div class="case-empty"><p class="eyebrow">Case study unavailable</p><h1 id="case-title">This project isn't published yet.</h1><p>Project details are only shown once they're ready to share. Nothing has been filled with placeholder employers, metrics, or architecture claims.</p><a class="button button--primary" routerLink="/" fragment="work">Back to selected work <span aria-hidden="true">&#8594;</span></a></div>
+  }
+</section>
