@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+	color-scheme: light;
+	--paper: #f7f7f2;
+	--ink: #1d2521;
+	--muted: #777d76;
+	--line: #dedfd7;
+	--line-strong: #bfc4ba;
+	--blue: #3157d5;
+	--lime: #d4ef68;
+	--coral: #e27659;
+	--font-body: 'DM Sans', sans-serif;
+	--font-display: 'Space Grotesk', sans-serif;
+
+	font-family: var(--font-body);
+	color: var(--ink);
+	background: var(--paper);
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	min-width: 320px;
+	margin: 0;
+	background-color: var(--paper);
+	background-image: radial-gradient(#d8d9d2 0.55px, transparent 0.55px);
+	background-size: 17px 17px;
+}
+
+body,
+a {
+	color: var(--ink);
+}
+
+a:focus-visible {
+	outline: 2px solid var(--blue);
+	outline-offset: 4px;
+}
+
+::selection {
+	background: var(--lime);
+	color: var(--ink);
+}
