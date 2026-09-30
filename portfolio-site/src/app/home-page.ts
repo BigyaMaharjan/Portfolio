@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { animate, stagger } from 'animejs';
 import { MotionPreferenceService } from './core/motion-preference.service';
 import { capabilityGroups } from './data/capabilities.data';
-import { experience, experienceSectors, systemTypes } from './data/experience.data';
+import { education, experience, experienceSectors, systemTypes } from './data/experience.data';
 import { profile } from './data/profile.data';
 import { projects } from './data/projects.data';
 
@@ -21,6 +21,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
 
   readonly profile = profile;
   readonly capabilities = capabilityGroups;
+  readonly education = education;
   readonly experience = experience;
   readonly experienceSectors = experienceSectors;
   readonly projects = projects.filter((project) => project.featured);

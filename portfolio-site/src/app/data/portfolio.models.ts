@@ -23,6 +23,13 @@ export interface Profile {
   readonly focusAreas: readonly string[];
 }
 
+export interface Education {
+  readonly institution: string;
+  readonly credential: string;
+  readonly location: string;
+  readonly graduation: string;
+}
+
 export interface ProjectOutcome {
   readonly value: string;
   readonly label: string;

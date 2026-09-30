@@ -4,19 +4,25 @@ export const capabilityGroups: readonly CapabilityGroup[] = [
   {
     id: 'backend-api',
     title: 'Backend & API design',
-    summary: 'Building backend systems primarily with C# and .NET.',
-    items: ['C#', '.NET', 'APIs & platform engineering']
+    summary: 'Build application services and backend modules with the .NET ecosystem.',
+    items: ['C#', 'ASP.NET', 'ABP Framework', 'Entity Framework']
   },
   {
     id: 'distributed-data',
     title: 'Data, messaging & distributed systems',
-    summary: 'Experience with distributed systems, background workflows, and reporting.',
-    items: ['Distributed systems', 'Microservices', 'Background workflows', 'Reporting']
+    summary: 'Work with relational data, scheduled jobs, and event-driven integrations.',
+    items: ['PostgreSQL', 'SQL', 'Kafka', 'Hangfire', 'Workflow Core']
   },
   {
-    id: 'domains',
-    title: 'Product domains',
-    summary: 'Backend work across business and public-service environments.',
-    items: ['FinTech', 'Banking', 'Telecom', 'Government', 'SaaS']
+    id: 'delivery',
+    title: 'Infrastructure & delivery',
+    summary: 'Use containerization, CI, and source control in application delivery.',
+    items: ['Docker', 'Jenkins', 'Git']
+  },
+  {
+    id: 'quality-security',
+    title: 'Quality & application security',
+    summary: 'Test service behavior and address security findings in application workflows.',
+    items: ['Unit testing', 'Integration testing', 'VAPT remediation', 'Rate limiting', 'Google reCAPTCHA']
   }
 ];

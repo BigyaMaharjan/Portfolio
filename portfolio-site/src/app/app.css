@@ -21,12 +21,9 @@
 .brand,
 .footer-brand {
 	display: inline-flex;
-	position: absolute;
-	inset: 0;
-	border: 1px solid rgb(28 38 35 / 9%);
-	border-radius: inherit;
-	content: '';
-	pointer-events: none;
+	align-items: center;
+	gap: 12px;
+	text-decoration: none;
 }
 
 .hero__image-frame img {
