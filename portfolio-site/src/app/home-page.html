@@ -134,6 +134,15 @@
   </div>
 </section>
 
+@if (education.length > 0) {
+  <section class="education-section page-wrap" aria-labelledby="education-title">
+    <div class="education-section__heading"><p class="eyebrow">Education</p><h2 id="education-title">Academic foundation</h2></div>
+    @for (item of education; track item.institution + item.credential) {
+      <article class="education-item"><div><h3>{{ item.credential }}</h3><p>{{ item.institution }} <span aria-hidden="true">·</span> {{ item.location }}</p></div><span>{{ item.graduation }}</span></article>
+    }
+  </section>
+}
+
 <section class="capabilities-section page-wrap" aria-labelledby="capabilities-title">
   <div class="section-heading" data-reveal><div><p class="eyebrow">Technical strengths</p><h2 id="capabilities-title">Tools in service of the system.</h2></div></div>
   @defer (on viewport) {

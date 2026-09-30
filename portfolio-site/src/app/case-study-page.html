@@ -39,16 +39,24 @@
         </figure>
       </section>
       <section class="case-section"><p class="eyebrow">03 / Trade-offs</p><h2>Engineering decisions</h2>
-        @for (decision of item.decisions; track decision.title) {
-          <article class="decision-item"><h3>{{ decision.title }}</h3><p>{{ decision.choice }}</p><p><span>Trade-off</span> {{ decision.tradeoff }}</p></article>
+        @if (item.decisions.length > 0) {
+          @for (decision of item.decisions; track decision.title) {
+            <article class="decision-item"><h3>{{ decision.title }}</h3><p>{{ decision.choice }}</p><p><span>Trade-off</span> {{ decision.tradeoff }}</p></article>
+          }
+        } @else {
+          <p class="case-evidence-empty">Engineering alternatives and trade-offs are not specified in the supplied résumé.</p>
         }
       </section>
       <section class="case-section"><p class="eyebrow">04 / Delivery</p><h2>Execution</h2><p>{{ item.execution }}</p></section>
-      @if (item.outcomes.length > 0) {
-        <section class="case-section case-section--wide"><p class="eyebrow">05 / Evidence</p><h2>Outcomes</h2><div class="case-outcomes">@for (outcome of item.outcomes; track outcome.label) { <article><strong>{{ outcome.value }}</strong><h3>{{ outcome.label }}</h3><p>{{ outcome.note }}</p></article> }</div></section>
-      }
+      <section class="case-section case-section--wide"><p class="eyebrow">05 / Evidence</p><h2>Outcomes</h2>
+        @if (item.outcomes.length > 0) {
+          <div class="case-outcomes">@for (outcome of item.outcomes; track outcome.label) { <article><strong>{{ outcome.value }}</strong><h3>{{ outcome.label }}</h3><p>{{ outcome.note }}</p></article> }</div>
+        } @else {
+          <p class="case-evidence-empty">The résumé does not list project-specific measured results. Role-level impact is shown on the homepage.</p>
+        }
+      </section>
       @if (item.lessons) { <section class="case-section"><p class="eyebrow">06 / Reflection</p><h2>Lessons</h2><p>{{ item.lessons }}</p></section> }
-      <section class="case-section"><p class="eyebrow">{{ item.outcomes.length > 0 ? '07' : '05' }} / Tools</p><h2>Stack</h2><div class="tag-list">@for (tag of item.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div></section>
+      <section class="case-section"><p class="eyebrow">{{ item.lessons ? '07' : '06' }} / Tools</p><h2>Stack</h2><div class="tag-list">@for (tag of item.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div></section>
     </div>
 
     @if (relatedProjects().length > 0) {

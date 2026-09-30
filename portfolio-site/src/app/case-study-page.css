@@ -32,6 +32,7 @@
 .decision-item + .decision-item { margin-top: 16px; }
 .decision-item h3 { margin: 0; }
 .decision-item p { margin: 7px 0; }
+.case-evidence-empty { max-width: 700px; padding: 14px 16px; border-left: 2px solid var(--border-strong); background: var(--surface-raised); color: var(--text-secondary); font-size: 11px; line-height: 1.7; }
 .case-outcomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .case-outcomes article { padding: 18px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface-raised); }
 .case-outcomes strong { color: var(--accent); font-family: var(--font-mono); font-size: 22px; }

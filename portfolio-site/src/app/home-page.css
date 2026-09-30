@@ -87,6 +87,12 @@
 .data-note { margin: 14px 0 0; color: var(--text-muted); font-size: 10px; }
 .experience-types-label { margin: 24px 0 0; color: var(--text-muted); font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; }
 .experience-types { margin-top: 9px; }
+.education-section { display: grid; grid-template-columns: .75fr 1.25fr; align-items: center; gap: 16px 42px; padding-block: 34px; border-bottom: 1px solid var(--border); }
+.education-section__heading h2 { margin: 8px 0 0; font-family: var(--font-display); font-size: 20px; }
+.education-item { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 17px 0; }
+.education-item h3 { margin: 0; font-size: 12px; font-weight: 600; }
+.education-item p, .education-item > span { margin: 5px 0 0; color: var(--text-secondary); font-size: 10px; }
+.education-item > span { flex: 0 0 auto; color: var(--text-muted); font-family: var(--font-mono); }
 .timeline { border-top: 1px solid var(--border-strong); }
 .timeline-item { padding: 17px 0; border-bottom: 1px solid var(--border); }
 .timeline-item summary { display: flex; justify-content: space-between; gap: 20px; cursor: pointer; list-style: none; }
@@ -126,6 +132,7 @@
 	.hero-copy { max-width: 720px; }
 	.system-visual { width: min(100%, 680px); justify-self: center; }
 	.experience-layout { grid-template-columns: 1fr; gap: 35px; }
+	.education-section { grid-template-columns: 1fr; gap: 8px; }
 	.about-section { gap: 42px; }
 }
 
