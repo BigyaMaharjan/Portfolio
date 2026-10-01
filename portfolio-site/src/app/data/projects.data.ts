@@ -37,6 +37,10 @@ export const projects: readonly Project[] = [
 		stack: ['C#', '.NET', 'Hangfire', 'Kafka'],
 		outcomes: [],
 		relatedProjects: [],
+		storeLinks: [
+			{ platform: 'Google Play' },
+			{ platform: 'App Store' }
+		],
 		confidentiality: 'Details summarized from résumé; confirm sharing scope.',
 		featured: true
 	},
@@ -85,6 +89,10 @@ export const projects: readonly Project[] = [
 		stack: ['C#', '.NET', 'SQL', 'Hangfire'],
 		outcomes: [],
 		relatedProjects: [],
+		storeLinks: [
+			{ platform: 'Google Play' },
+			{ platform: 'App Store' }
+		],
 		confidentiality: 'Details summarized from résumé; confirm sharing scope.',
 		featured: true
 	},

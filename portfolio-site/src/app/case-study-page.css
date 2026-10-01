@@ -10,6 +10,7 @@
 .case-hero__meta strong { font-size: 11px; font-weight: 500; }
 .case-links { display: flex; gap: 20px; }
 .case-links a { color: var(--accent); }
+.case-store-links { margin-top: 14px; }
 .case-grid { margin-top: 28px; }
 .case-section { min-height: 180px; padding: 28px; background: var(--surface); }
 .case-section--wide { grid-column: 1 / -1; }

@@ -36,6 +36,11 @@ export interface ProjectOutcome {
   readonly note: string;
 }
 
+export interface ProjectStoreLink {
+  readonly platform: 'Google Play' | 'App Store';
+  readonly url?: string;
+}
+
 export interface ProjectDecision {
   readonly title: string;
   readonly choice: string;
@@ -95,6 +100,7 @@ export interface Project {
   readonly relatedProjects: readonly string[];
   readonly githubUrl?: string;
   readonly liveUrl?: string;
+  readonly storeLinks?: readonly ProjectStoreLink[];
   readonly confidentiality: string;
   readonly featured: boolean;
 }

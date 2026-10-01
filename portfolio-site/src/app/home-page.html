@@ -85,6 +85,17 @@
           <p class="project-card__summary">{{ project.oneLiner }}</p>
           <p class="project-card__role"><span>My role</span> {{ project.role }}</p>
           <div class="tag-list">@for (tag of project.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div>
+          @if (project.storeLinks?.length) {
+            <div class="project-card__stores" [attr.aria-label]="project.name + ' app store listings'">
+              @for (storeLink of project.storeLinks; track storeLink.platform) {
+                @if (storeLink.url) {
+                  <a class="store-link" [href]="storeLink.url" target="_blank" rel="noopener noreferrer">{{ storeLink.platform }} <span aria-hidden="true">&#8599;</span></a>
+                } @else {
+                  <span class="store-link store-link--pending" [attr.aria-label]="storeLink.platform + ' URL placeholder'">{{ storeLink.platform }} <small>Link pending</small></span>
+                }
+              }
+            </div>
+          }
           @if (project.outcomes.length > 0) {
             <div class="project-card__outcomes">@for (outcome of project.outcomes.slice(0, 2); track outcome.label) { <p><strong>{{ outcome.value }}</strong><span>{{ outcome.label }}</span></p> }</div>
           }

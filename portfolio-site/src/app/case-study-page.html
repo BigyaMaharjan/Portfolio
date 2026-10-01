@@ -14,6 +14,17 @@
         @if (item.githubUrl) { <a [href]="item.githubUrl" target="_blank" rel="noopener noreferrer">Source <span aria-hidden="true">&#8599;</span></a> }
         @if (item.liveUrl) { <a [href]="item.liveUrl" target="_blank" rel="noopener noreferrer">Live site <span aria-hidden="true">&#8599;</span></a> }
       </nav>
+      @if (item.storeLinks?.length) {
+        <div class="case-store-links" [attr.aria-label]="item.name + ' app store listings'">
+          @for (storeLink of item.storeLinks; track storeLink.platform) {
+            @if (storeLink.url) {
+              <a class="store-link" [href]="storeLink.url" target="_blank" rel="noopener noreferrer">{{ storeLink.platform }} <span aria-hidden="true">&#8599;</span></a>
+            } @else {
+              <span class="store-link store-link--pending" [attr.aria-label]="storeLink.platform + ' URL placeholder'">{{ storeLink.platform }} <small>Link pending</small></span>
+            }
+          }
+        </div>
+      }
     </header>
 
     <div class="case-grid">
