@@ -68,6 +68,11 @@
 .project-card__summary { color: var(--text-secondary); font-size: 12px; line-height: 1.7; }
 .project-card__role { color: var(--text-secondary); font-size: 10px; line-height: 1.6; }
 .project-card__role span { color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase; }
+.project-card__stores, .case-store-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+.store-link { min-height: 30px; display: inline-flex; align-items: center; gap: 7px; padding: 0 10px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface-raised); color: var(--accent); font-size: 9px; text-decoration: none; }
+.store-link:not(.store-link--pending):hover { border-color: var(--accent); background: var(--surface-hover); }
+.store-link--pending { border-style: dashed; color: var(--text-muted); cursor: default; }
+.store-link small { color: var(--text-muted); font-size: 8px; }
 .project-card__outcomes { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 15px; padding-block: 12px; border-block: 1px solid var(--border); }
 .project-card__outcomes p { display: grid; gap: 3px; margin: 0; }
 .project-card__outcomes strong { color: var(--accent); font-family: var(--font-mono); font-size: 16px; }
