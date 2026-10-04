@@ -90,8 +90,8 @@ export const projects: readonly Project[] = [
 		outcomes: [],
 		relatedProjects: [],
 		storeLinks: [
-			{ platform: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en' },
-			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/ncell/id922410448' }
+			{ platform: 'Google Play', url: 'https://play.google.com/store/search?q=global+chautari&c=apps&hl=en' },
+			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/global-chautari/id6777895784' }
 		],
 		confidentiality: 'Details summarized from rAcsumAc; confirm sharing scope.',
 		featured: true
@@ -202,8 +202,8 @@ export const projects: readonly Project[] = [
 		outcomes: [],
 		relatedProjects: [],
 		storeLinks: [
-			{ platform: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en' },
-			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/ncell/id922410448' }
+			{ platform: 'Google Play', url: 'https://play.google.com/store/search?q=global+chautari&c=apps&hl=en' },
+			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/global-chautari/id6777895784' }
 		],
 		confidentiality: 'Details summarized from rAcsumAc; confirm sharing scope.',
 		featured: true
