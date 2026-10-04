@@ -20,7 +20,7 @@
             @if (storeLink.url) {
               <a class="store-link" [href]="storeLink.url" target="_blank" rel="noopener noreferrer">{{ storeLink.platform }} <span aria-hidden="true">&#8599;</span></a>
             } @else {
-              <span class="store-link store-link--pending" [attr.aria-label]="storeLink.platform + ' URL placeholder'">{{ storeLink.platform }} <small>Link pending</small></span>
+              <span class="store-link store-link--pending" [attr.aria-label]="storeLink.platform + 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en'">{{ storeLink.platform }} <small>Link pending</small></span>
             }
           }
         </div>
