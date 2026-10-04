@@ -38,10 +38,10 @@ export const projects: readonly Project[] = [
 		outcomes: [],
 		relatedProjects: [],
 		storeLinks: [
-			{ platform: 'Google Play' },
-			{ platform: 'App Store' }
+			{ platform: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en' },
+			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/ncell/id922410448' }
 		],
-		confidentiality: 'Details summarized from résumé; confirm sharing scope.',
+		confidentiality: 'Details summarized from rAcsumAc; confirm sharing scope.',
 		featured: true
 	},
 	{
@@ -90,10 +90,10 @@ export const projects: readonly Project[] = [
 		outcomes: [],
 		relatedProjects: [],
 		storeLinks: [
-			{ platform: 'Google Play' },
-			{ platform: 'App Store' }
+			{ platform: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en' },
+			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/ncell/id922410448' }
 		],
-		confidentiality: 'Details summarized from résumé; confirm sharing scope.',
+		confidentiality: 'Details summarized from rAcsumAc; confirm sharing scope.',
 		featured: true
 	},
 	{
@@ -201,7 +201,11 @@ export const projects: readonly Project[] = [
 		stack: ['C#', '.NET', 'Microservices', 'Image/video uploads'],
 		outcomes: [],
 		relatedProjects: [],
-		confidentiality: 'Details summarized from résumé; confirm sharing scope.',
+		storeLinks: [
+			{ platform: 'Google Play', url: 'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en' },
+			{ platform: 'App Store', url: 'https://apps.apple.com/np/app/ncell/id922410448' }
+		],
+		confidentiality: 'Details summarized from rAcsumAc; confirm sharing scope.',
 		featured: true
 	}
 ];
