@@ -6,7 +6,7 @@ import { profile } from './data/profile.data';
   selector: 'app-resume-page',
   templateUrl: './resume-page.html',
   styleUrl: './resume-page.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ResumePage {
   readonly profile = profile;

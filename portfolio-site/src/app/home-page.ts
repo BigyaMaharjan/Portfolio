@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, inject, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  inject,
+  signal,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { animate, stagger } from 'animejs';
 import { MotionPreferenceService } from './core/motion-preference.service';
@@ -12,7 +20,7 @@ import { projects } from './data/projects.data';
   imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomePage implements AfterViewInit, OnDestroy {
   private readonly host = inject(ElementRef<HTMLElement>);
@@ -40,7 +48,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
       y: [14, 0],
       duration: 560,
       delay: stagger(75),
-      ease: 'out(3)'
+      ease: 'out(3)',
     });
 
     const revealItems = Array.from(root.querySelectorAll('[data-reveal]'));
@@ -48,21 +56,24 @@ export class HomePage implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.observer = new IntersectionObserver((entries, observer) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) {
-          continue;
-        }
+    this.observer = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) {
+            continue;
+          }
 
-        animate(entry.target, {
-          opacity: [0, 1],
-          y: [14, 0],
-          duration: 460,
-          ease: 'out(3)'
-        });
-        observer.unobserve(entry.target);
-      }
-    }, { threshold: 0.08 });
+          animate(entry.target, {
+            opacity: [0, 1],
+            y: [14, 0],
+            duration: 460,
+            ease: 'out(3)',
+          });
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.08 },
+    );
 
     revealItems.forEach((item) => this.observer?.observe(item));
   }

@@ -1,41 +1,82 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Bigya Maharjan — Backend Software Developer</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Backend software developer in Kathmandu, Nepal. Building and improving .NET systems across banking, telecom, government, and SaaS.">
-  <meta name="theme-color" content="#101615">
-  <meta property="og:type" content="profile">
-  <meta property="og:title" content="Bigya Maharjan — Backend Software Developer">
-  <meta property="og:description" content="Building and improving backend systems with .NET across banking, telecom, government, and SaaS.">
-  <meta property="og:locale" content="en_US">
-  <link rel="canonical" href="/">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <script>
-    try {
-      const themeOverride = localStorage.getItem('bigya-portfolio-theme');
-      document.documentElement.dataset.theme = themeOverride === 'light' || themeOverride === 'dark'
-        ? themeOverride
-        : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      const motionOverride = localStorage.getItem('bigya-portfolio-reduced-motion');
-      document.documentElement.dataset.motion = motionOverride === 'reduce' || motionOverride === 'full'
-        ? motionOverride
-        : window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'full';
-    } catch {
-      document.documentElement.dataset.theme = 'dark';
-      document.documentElement.dataset.motion = 'full';
-    }
-  </script>
-  <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Person","@id":"#bigya-maharjan","name":"Bigya Maharjan","jobTitle":"Backend Software Developer","email":"mailto:bigyamaharjan2000@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Kathmandu","addressCountry":"NP"},"sameAs":["https://github.com/BigyaMaharjan","https://www.linkedin.com/in/bigya-maharjan-b7441b299/"],"knowsAbout":["C#",".NET","FinTech","Distributed systems","API design","Platform engineering","Microservices"]}
-  </script>
-  <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"ProfilePage","mainEntity":{"@id":"#bigya-maharjan"}}
-  </script>
-</head>
-<body>
-  <app-root></app-root>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bigya Maharjan — Backend Software Developer</title>
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Backend software developer in Kathmandu, Nepal. Building and improving .NET systems across banking, telecom, government, and SaaS."
+    />
+    <meta name="theme-color" content="#101615" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Bigya Maharjan — Backend Software Developer" />
+    <meta
+      property="og:description"
+      content="Building and improving backend systems with .NET across banking, telecom, government, and SaaS."
+    />
+    <meta property="og:locale" content="en_US" />
+    <link rel="canonical" href="/" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <script>
+      try {
+        const themeOverride = localStorage.getItem('bigya-portfolio-theme');
+        document.documentElement.dataset.theme =
+          themeOverride === 'light' || themeOverride === 'dark'
+            ? themeOverride
+            : window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        const motionOverride = localStorage.getItem('bigya-portfolio-reduced-motion');
+        document.documentElement.dataset.motion =
+          motionOverride === 'reduce' || motionOverride === 'full'
+            ? motionOverride
+            : window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'reduce'
+              : 'full';
+      } catch {
+        document.documentElement.dataset.theme = 'dark';
+        document.documentElement.dataset.motion = 'full';
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "#bigya-maharjan",
+        "name": "Bigya Maharjan",
+        "jobTitle": "Backend Software Developer",
+        "email": "mailto:bigyamaharjan2000@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kathmandu",
+          "addressCountry": "NP"
+        },
+        "sameAs": [
+          "https://github.com/BigyaMaharjan",
+          "https://www.linkedin.com/in/bigya-maharjan-b7441b299/"
+        ],
+        "knowsAbout": [
+          "C#",
+          ".NET",
+          "FinTech",
+          "Distributed systems",
+          "API design",
+          "Platform engineering",
+          "Microservices"
+        ]
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfilePage",
+        "mainEntity": { "@id": "#bigya-maharjan" }
+      }
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>
