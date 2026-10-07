@@ -9,12 +9,16 @@ import { projects } from './data/projects.data';
   imports: [RouterLink],
   templateUrl: './case-study-page.html',
   styleUrl: './case-study-page.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CaseStudyPage {
   private readonly route = inject(ActivatedRoute);
-  private readonly params = toSignal(this.route.paramMap, { initialValue: this.route.snapshot.paramMap });
-  readonly project = computed(() => projects.find((item) => item.slug === this.params().get('slug')));
+  private readonly params = toSignal(this.route.paramMap, {
+    initialValue: this.route.snapshot.paramMap,
+  });
+  readonly project = computed(() =>
+    projects.find((item) => item.slug === this.params().get('slug')),
+  );
   readonly relatedProjects = computed(() => {
     const currentProject = this.project();
     if (!currentProject) {

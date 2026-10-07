@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, HostListener, ViewChild, effect, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  HostListener,
+  ViewChild,
+  effect,
+  inject,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
@@ -13,7 +23,7 @@ import { projects } from './data/projects.data';
   imports: [RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   private readonly router = inject(Router);
@@ -33,14 +43,17 @@ export class App {
 
   constructor() {
     effect(() => {
-      this.meta.updateTag({ name: 'theme-color', content: this.themePreference.theme() === 'dark' ? '#111817' : '#f4f7f5' });
+      this.meta.updateTag({
+        name: 'theme-color',
+        content: this.themePreference.theme() === 'dark' ? '#111817' : '#f4f7f5',
+      });
     });
 
     this.updatePageMetadata(this.router.url);
     this.router.events
       .pipe(
         filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-        takeUntilDestroyed(this.destroyRef)
+        takeUntilDestroyed(this.destroyRef),
       )
       .subscribe((event) => {
         this.closeMenu();
@@ -61,11 +74,19 @@ export class App {
       return;
     }
 
-    if (event.key !== 'Tab' || !this.menuOpen() || !window.matchMedia('(max-width: 900px)').matches) {
+    if (
+      event.key !== 'Tab' ||
+      !this.menuOpen() ||
+      !window.matchMedia('(max-width: 900px)').matches
+    ) {
       return;
     }
 
-    const focusable = Array.from(this.primaryNav?.nativeElement.querySelectorAll<HTMLElement>('a[href], button:not([disabled])') ?? []);
+    const focusable = Array.from(
+      this.primaryNav?.nativeElement.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled])',
+      ) ?? [],
+    );
     const first = focusable[0];
     const last = focusable.at(-1);
 
@@ -118,9 +139,11 @@ export class App {
     const caseStudy = project ? projects.find((item) => item.slug === project) : undefined;
     const pageTitle = caseStudy
       ? `${caseStudy.name} — Case Study | ${profile.name}`
-      : route.title ?? 'Bigya Maharjan — Backend Software Developer';
-    const description = caseStudy?.oneLiner ?? route.data['description'] as string
-      ?? 'Bigya Maharjan is a backend software developer building systems with C# and .NET.';
+      : (route.title ?? 'Bigya Maharjan — Backend Software Developer');
+    const description =
+      caseStudy?.oneLiner ??
+      (route.data['description'] as string) ??
+      'Bigya Maharjan is a backend software developer building systems with C# and .NET.';
     const canonicalPath = url.split(/[?#]/, 1)[0] || '/';
     const canonicalUrl = new URL(canonicalPath, window.location.origin).href;
 
@@ -129,7 +152,9 @@ export class App {
     this.meta.updateTag({ property: 'og:title', content: pageTitle });
     this.meta.updateTag({ property: 'og:description', content: description });
     this.meta.updateTag({ property: 'og:url', content: canonicalUrl });
-    document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
+    document
+      .querySelector<HTMLLinkElement>('link[rel="canonical"]')
+      ?.setAttribute('href', canonicalUrl);
   }
 
   private scrollToFragment(url: string): void {
@@ -144,7 +169,8 @@ export class App {
         return;
       }
 
-      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0;
+      const headerHeight =
+        document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0;
       const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight;
       window.scrollTo({ top: Math.max(0, targetTop), behavior: 'instant' });
     }, 0);

@@ -3,44 +3,126 @@
     <div class="hero-copy">
       <p class="availability-pill" data-hero-enter>
         <span class="availability-pill__dot" aria-hidden="true"></span>
-        {{ profile.availability }} <span class="availability-pill__divider" aria-hidden="true">/</span> {{ profile.location }}
+        {{ profile.availability }}
+        <span class="availability-pill__divider" aria-hidden="true">/</span> {{ profile.location }}
       </p>
       <p class="eyebrow" data-hero-enter>{{ profile.title }}</p>
-      <h1 id="hero-title" data-hero-enter>I build backend systems that make complex products <span>work better.</span></h1>
+      <h1 id="hero-title" data-hero-enter>
+        I build backend systems that make complex products <span>work better.</span>
+      </h1>
       <p class="hero-summary" data-hero-enter>{{ profile.shortBio }}</p>
       <div class="hero-actions" data-hero-enter>
-        <a class="button button--primary" routerLink="/" fragment="work">View selected work <span aria-hidden="true">&#8595;</span></a>
-        <a class="button button--secondary" [href]="profile.resumeUrl" download>Download résumé <span aria-hidden="true">&#8599;</span></a>
+        <a class="button button--primary" routerLink="/" fragment="work"
+          >View selected work <span aria-hidden="true">&#8595;</span></a
+        >
+        <a class="button button--secondary" [href]="profile.resumeUrl" download
+          >Download résumé <span aria-hidden="true">&#8599;</span></a
+        >
       </div>
       <div class="hero-socials" data-hero-enter aria-label="Social profiles">
-        <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile, opens in a new tab">GitHub <span aria-hidden="true">&#8599;</span></a>
-        <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile, opens in a new tab">LinkedIn <span aria-hidden="true">&#8599;</span></a>
+        <a
+          [href]="profile.social.github"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub profile, opens in a new tab"
+          >GitHub <span aria-hidden="true">&#8599;</span></a
+        >
+        <a
+          [href]="profile.social.linkedin"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn profile, opens in a new tab"
+          >LinkedIn <span aria-hidden="true">&#8599;</span></a
+        >
       </div>
     </div>
 
     <div class="system-visual" data-hero-enter>
-      <div class="system-visual__topline"><span>SYSTEMS / 01—04</span><span>DOTNET / BACKEND</span></div>
-      <svg class="system-diagram" viewBox="0 0 620 500" role="img" aria-labelledby="system-title system-description">
+      <div class="system-visual__topline">
+        <span>SYSTEMS / 01—04</span><span>DOTNET / BACKEND</span>
+      </div>
+      <svg
+        class="system-diagram"
+        viewBox="0 0 620 500"
+        role="img"
+        aria-labelledby="system-title system-description"
+      >
         <title id="system-title">Backend system topology</title>
-        <desc id="system-description">A decorative diagram showing a request moving through an API, services, data, and observability.</desc>
+        <desc id="system-description">
+          A decorative diagram showing a request moving through an API, services, data, and
+          observability.
+        </desc>
         <defs>
           <pattern id="diagram-grid" width="24" height="24" patternUnits="userSpaceOnUse">
             <circle cx="1" cy="1" r="1" class="diagram-grid-dot" />
           </pattern>
-          <marker id="diagram-arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <marker
+            id="diagram-arrow"
+            markerWidth="8"
+            markerHeight="8"
+            refX="6"
+            refY="4"
+            orient="auto"
+          >
             <path d="M0 0L8 4L0 8" class="diagram-arrowhead" />
           </marker>
         </defs>
         <rect x="1" y="1" width="618" height="498" rx="18" fill="url(#diagram-grid)" />
-        <path class="diagram-path" d="M116 251H218M342 251H432M279 207V126M279 295V377M495 207V126M495 295V377" marker-end="url(#diagram-arrow)" />
+        <path
+          class="diagram-path"
+          d="M116 251H218M342 251H432M279 207V126M279 295V377M495 207V126M495 295V377"
+          marker-end="url(#diagram-arrow)"
+        />
         <path class="diagram-path diagram-path--secondary" d="M279 126H495M279 377H495" />
         <circle class="diagram-node diagram-node--edge" cx="91" cy="251" r="40" />
-        <rect class="diagram-node diagram-node--service" x="218" y="207" width="124" height="88" rx="14" />
-        <rect class="diagram-node diagram-node--service" x="432" y="207" width="126" height="88" rx="14" />
-        <rect class="diagram-node diagram-node--small" x="232" y="81" width="94" height="54" rx="12" />
-        <rect class="diagram-node diagram-node--small" x="449" y="81" width="94" height="54" rx="12" />
-        <rect class="diagram-node diagram-node--small" x="232" y="350" width="94" height="54" rx="12" />
-        <rect class="diagram-node diagram-node--small" x="449" y="350" width="94" height="54" rx="12" />
+        <rect
+          class="diagram-node diagram-node--service"
+          x="218"
+          y="207"
+          width="124"
+          height="88"
+          rx="14"
+        />
+        <rect
+          class="diagram-node diagram-node--service"
+          x="432"
+          y="207"
+          width="126"
+          height="88"
+          rx="14"
+        />
+        <rect
+          class="diagram-node diagram-node--small"
+          x="232"
+          y="81"
+          width="94"
+          height="54"
+          rx="12"
+        />
+        <rect
+          class="diagram-node diagram-node--small"
+          x="449"
+          y="81"
+          width="94"
+          height="54"
+          rx="12"
+        />
+        <rect
+          class="diagram-node diagram-node--small"
+          x="232"
+          y="350"
+          width="94"
+          height="54"
+          rx="12"
+        />
+        <rect
+          class="diagram-node diagram-node--small"
+          x="449"
+          y="350"
+          width="94"
+          height="54"
+          rx="12"
+        />
         <text class="diagram-label" x="91" y="247" text-anchor="middle">API</text>
         <text class="diagram-sublabel" x="91" y="264" text-anchor="middle">REQUEST</text>
         <text class="diagram-label" x="280" y="245" text-anchor="middle">SERVICE</text>
@@ -53,26 +135,40 @@
         <text class="diagram-small-label" x="496" y="382" text-anchor="middle">TELEMETRY</text>
         <circle class="diagram-pulse" cx="116" cy="251" r="4" />
       </svg>
-      <div class="system-visual__legend"><span><i></i> Request path</span><span><i></i> Services</span><span>Illustrative system map</span></div>
+      <div class="system-visual__legend">
+        <span><i></i> Request path</span><span><i></i> Services</span
+        ><span>Illustrative system map</span>
+      </div>
     </div>
   </div>
 
   @if (profile.heroMetrics.length > 0) {
     <div class="hero-metrics page-wrap" aria-label="Selected impact metrics">
       @for (metric of profile.heroMetrics; track metric.label) {
-        <article class="hero-metric"><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span>@if (metric.note) { <small>{{ metric.note }}</small> }</article>
+        <article class="hero-metric">
+          <strong>{{ metric.value }}</strong
+          ><span>{{ metric.label }}</span>
+          @if (metric.note) {
+            <small>{{ metric.note }}</small>
+          }
+        </article>
       }
     </div>
   }
   <div class="hero-proof page-wrap">
     <span>Across domains</span>
-    @for (sector of experienceSectors; track sector) { <span class="proof-chip">{{ sector }}</span> }
+    @for (sector of experienceSectors; track sector) {
+      <span class="proof-chip">{{ sector }}</span>
+    }
   </div>
 </section>
 
 <section id="work" class="section-block page-wrap" aria-labelledby="work-title">
   <div class="section-heading" data-reveal>
-    <div><p class="eyebrow">Selected work</p><h2 id="work-title">Systems built for the real world.</h2></div>
+    <div>
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-title">PROJECTS</h2>
+    </div>
     <p>Backend engineering across products and industries.</p>
   </div>
   @if (projects.length > 0) {
@@ -84,30 +180,64 @@
           <p class="project-card__category">{{ project.category }}</p>
           <p class="project-card__summary">{{ project.oneLiner }}</p>
           <p class="project-card__role"><span>My role</span> {{ project.role }}</p>
-          <div class="tag-list">@for (tag of project.stack.slice(0, 5); track tag) { <span class="tag">{{ tag }}</span> }</div>
+          <div class="tag-list">
+            @for (tag of project.stack.slice(0, 5); track tag) {
+              <span class="tag">{{ tag }}</span>
+            }
+          </div>
           @if (project.storeLinks?.length) {
-            <div class="project-card__stores" [attr.aria-label]="project.name + ' app store listings'">
+            <div
+              class="project-card__stores"
+              [attr.aria-label]="project.name + ' app store listings'"
+            >
               @for (storeLink of project.storeLinks; track storeLink.platform) {
                 @if (storeLink.url) {
-                  <a class="store-link" [href]="storeLink.url" target="_blank" rel="noopener noreferrer">{{ storeLink.platform }} <span aria-hidden="true">&#8599;</span></a>
+                  <a
+                    class="store-link"
+                    [href]="storeLink.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >{{ storeLink.platform }} <span aria-hidden="true">&#8599;</span></a
+                  >
                 } @else {
-                  <span class="store-link store-link--pending" [attr.aria-label]="storeLink.platform + ' URL placeholder'">{{ storeLink.platform }} <small>Link pending</small></span>
+                  <span
+                    class="store-link store-link--pending"
+                    [attr.aria-label]="storeLink.platform + ' URL placeholder'"
+                    >{{ storeLink.platform }} <small>Link pending</small></span
+                  >
                 }
               }
             </div>
           }
           @if (project.outcomes.length > 0) {
-            <div class="project-card__outcomes">@for (outcome of project.outcomes.slice(0, 2); track outcome.label) { <p><strong>{{ outcome.value }}</strong><span>{{ outcome.label }}</span></p> }</div>
+            <div class="project-card__outcomes">
+              @for (outcome of project.outcomes.slice(0, 2); track outcome.label) {
+                <p>
+                  <strong>{{ outcome.value }}</strong
+                  ><span>{{ outcome.label }}</span>
+                </p>
+              }
+            </div>
           }
-          <a class="text-link" [routerLink]="['/work', project.slug]">Read case study <span aria-hidden="true">&#8594;</span></a>
+          <a class="text-link" [routerLink]="['/work', project.slug]"
+            >Read case study <span aria-hidden="true">&#8594;</span></a
+          >
         </article>
       }
     </div>
   } @else {
     <div class="empty-state" data-reveal>
       <div class="empty-state__marker" aria-hidden="true">01 / 00</div>
-      <div><h3>Case studies are being prepared.</h3><p>Professional systems span banking, telecom, government, and SaaS. Specific project names and results will appear here when they're ready to share.</p></div>
-      <a class="text-link" routerLink="/resume">View résumé <span aria-hidden="true">&#8594;</span></a>
+      <div>
+        <h3>Case studies are being prepared.</h3>
+        <p>
+          Professional systems span banking, telecom, government, and SaaS. Specific project names
+          and results will appear here when they're ready to share.
+        </p>
+      </div>
+      <a class="text-link" routerLink="/resume"
+        >View résumé <span aria-hidden="true">&#8594;</span></a
+      >
     </div>
   }
 </section>
@@ -124,22 +254,45 @@
         <div class="timeline">
           @for (position of experience; track position.company + position.start) {
             <details class="timeline-item">
-              <summary><span><strong>{{ position.role }}</strong><small>{{ position.company }} · {{ position.location }}</small></span><span>{{ position.start }} — {{ position.end }}</span></summary>
+              <summary>
+                <span
+                  ><strong>{{ position.role }}</strong
+                  ><small>{{ position.company }} · {{ position.location }}</small></span
+                ><span>{{ position.start }} — {{ position.end }}</span>
+              </summary>
               <p>{{ position.summary }}</p>
-              <ul>@for (highlight of position.highlights; track highlight) { <li>{{ highlight }}</li> }</ul>
-              <div class="tag-list">@for (tag of position.stack; track tag) { <span class="tag">{{ tag }}</span> }</div>
+              <ul>
+                @for (highlight of position.highlights; track highlight) {
+                  <li>{{ highlight }}</li>
+                }
+              </ul>
+              <div class="tag-list">
+                @for (tag of position.stack; track tag) {
+                  <span class="tag">{{ tag }}</span>
+                }
+              </div>
             </details>
           }
         </div>
       } @else {
         <div class="domain-list">
           @for (sector of experienceSectors; track sector; let index = $index) {
-            <div class="domain-row"><span class="domain-row__index">0{{ index + 1 }}</span><strong>{{ sector }}</strong><span>Backend systems</span></div>
+            <div class="domain-row">
+              <span class="domain-row__index">0{{ index + 1 }}</span
+              ><strong>{{ sector }}</strong
+              ><span>Backend systems</span>
+            </div>
           }
         </div>
         <p class="experience-types-label">Systems and workflows</p>
-        <div class="tag-list experience-types">@for (systemType of systemTypes; track systemType) { <span class="tag">{{ systemType }}</span> }</div>
-        <p class="data-note">Role names, dates, and individual contributions are omitted until supplied.</p>
+        <div class="tag-list experience-types">
+          @for (systemType of systemTypes; track systemType) {
+            <span class="tag">{{ systemType }}</span>
+          }
+        </div>
+        <p class="data-note">
+          Role names, dates, and individual contributions are omitted until supplied.
+        </p>
       }
     </div>
   </div>
@@ -147,19 +300,42 @@
 
 @if (education.length > 0) {
   <section class="education-section page-wrap" aria-labelledby="education-title">
-    <div class="education-section__heading"><p class="eyebrow">Education</p><h2 id="education-title">Academic foundation</h2></div>
+    <div class="education-section__heading">
+      <p class="eyebrow">Education</p>
+      <h2 id="education-title">Academic foundation</h2>
+    </div>
     @for (item of education; track item.institution + item.credential) {
-      <article class="education-item"><div><h3>{{ item.credential }}</h3><p>{{ item.institution }} <span aria-hidden="true">·</span> {{ item.location }}</p></div><span>{{ item.graduation }}</span></article>
+      <article class="education-item">
+        <div>
+          <h3>{{ item.credential }}</h3>
+          <p>{{ item.institution }} <span aria-hidden="true">·</span> {{ item.location }}</p>
+        </div>
+        <span>{{ item.graduation }}</span>
+      </article>
     }
   </section>
 }
 
 <section class="capabilities-section page-wrap" aria-labelledby="capabilities-title">
-  <div class="section-heading" data-reveal><div><p class="eyebrow">Technical strengths</p><h2 id="capabilities-title">Tools in service of the system.</h2></div></div>
+  <div class="section-heading" data-reveal>
+    <div>
+      <p class="eyebrow">Technical strengths</p>
+      <h2 id="capabilities-title">Tools in service of the system.</h2>
+    </div>
+  </div>
   @defer (on viewport) {
     <div class="capability-grid">
       @for (group of capabilities; track group.id) {
-        <article class="capability-card"><span class="capability-card__index">{{ ($index + 1).toString().padStart(2, '0') }}</span><h3>{{ group.title }}</h3><p>{{ group.summary }}</p><div class="tag-list">@for (item of group.items; track item) { <span class="tag">{{ item }}</span> }</div></article>
+        <article class="capability-card">
+          <span class="capability-card__index">{{ ($index + 1).toString().padStart(2, '0') }}</span>
+          <h3>{{ group.title }}</h3>
+          <p>{{ group.summary }}</p>
+          <div class="tag-list">
+            @for (item of group.items; track item) {
+              <span class="tag">{{ item }}</span>
+            }
+          </div>
+        </article>
       }
     </div>
   } @placeholder {
@@ -168,13 +344,35 @@
 </section>
 
 <section id="about" class="about-section page-wrap" aria-labelledby="about-title">
-  <div class="about-section__index" data-reveal><p class="eyebrow">A little about me</p><span>CURIOUS BY DEFAULT</span></div>
-  <div class="about-section__content" data-reveal><h2 id="about-title">Always learning.<br />Always looking under the hood.</h2><p>{{ profile.shortBio }}</p><p class="about-section__location">{{ profile.location }} <span aria-hidden="true">·</span> Backend / .NET</p></div>
+  <div class="about-section__index" data-reveal>
+    <p class="eyebrow">A little about me</p>
+    <span>CURIOUS BY DEFAULT</span>
+  </div>
+  <div class="about-section__content" data-reveal>
+    <h2 id="about-title">Always learning.<br />Always looking under the hood.</h2>
+    <p>{{ profile.shortBio }}</p>
+    <p class="about-section__location">
+      {{ profile.location }} <span aria-hidden="true">·</span> Backend / .NET
+    </p>
+  </div>
 </section>
 
 <section id="contact" class="contact-section" aria-labelledby="contact-title">
   <div class="page-wrap contact-layout">
-    <div><p class="eyebrow">{{ profile.availability }}</p><h2 id="contact-title">Have a system that needs to be faster, safer, or easier to operate?</h2><p>Let's talk.</p></div>
-    <div class="contact-actions"><a class="button button--primary" [href]="'mailto:' + profile.email">Email Bigya <span aria-hidden="true">&#8599;</span></a><button class="copy-button" type="button" (click)="copyEmail()">{{ copyStatus() || 'Copy email address' }}</button><p class="contact-email">{{ profile.email }}</p></div>
+    <div>
+      <p class="eyebrow">{{ profile.availability }}</p>
+      <h2 id="contact-title">
+        Have a system that needs to be faster, safer, or easier to operate?
+      </h2>
+      <p>Let's talk.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="button button--primary" [href]="'mailto:' + profile.email"
+        >Email Bigya <span aria-hidden="true">&#8599;</span></a
+      ><button class="copy-button" type="button" (click)="copyEmail()">
+        {{ copyStatus() || 'Copy email address' }}
+      </button>
+      <p class="contact-email">{{ profile.email }}</p>
+    </div>
   </div>
 </section>
