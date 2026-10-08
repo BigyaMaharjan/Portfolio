@@ -14,8 +14,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
-import { animate } from 'animejs';
+import { animate, type JSAnimation } from 'animejs';
 import { MotionPreferenceService } from './core/motion-preference.service';
+import { SiteRevealService } from './core/site-reveal.service';
 import { ThemePreferenceService } from './core/theme-preference.service';
 import { profile } from './data/profile.data';
 import { projects } from './data/projects.data';
@@ -34,6 +35,8 @@ export class App implements OnDestroy {
   private readonly meta = inject(Meta);
   readonly themePreference = inject(ThemePreferenceService);
   readonly motionPreference = inject(MotionPreferenceService);
+  private readonly siteReveal = inject(SiteRevealService);
+  readonly siteRevealed = this.siteReveal.revealed;
   readonly profile = profile;
   readonly menuOpen = signal(false);
   readonly compactHeader = signal(false);
@@ -57,18 +60,17 @@ export class App implements OnDestroy {
   private expansionFallback?: number;
 
   // --- scroll progress bar & cursor follower ---
-  private cursorEl?: HTMLElement;
   private mouseX = 0;
   private mouseY = 0;
   private cursorX = 0;
   private cursorY = 0;
   private targetScale = 1;
   private scaleT = 1;
-  private cursorAnim?: Anime.AnimeInstance;
+  private loaderAnim?: JSAnimation;
   private cursorRafId?: number;
-  private expansionTimeoutId?: number;
 
-  @ViewChild('cursorFollower') private cursorFollower?: ElementRef<HTMLDivElement>;
+  @ViewChild('cursorFollower', { static: true })
+  private cursorFollower?: ElementRef<HTMLDivElement>;
 
   constructor() {
     effect(() => {
@@ -99,7 +101,7 @@ export class App implements OnDestroy {
     effect(() => {
       const show =
         !this.motionPreference.reducedMotion() && window.matchMedia('(pointer: fine)').matches;
-      document.documentElement.style.setProperty('--cursor-visible', show ? '1' : '0');
+      document.documentElement.style.setProperty('--cursor-visible', show ? 'visible' : 'hidden');
     });
 
     void this.startInitialLoader();
@@ -176,7 +178,6 @@ export class App implements OnDestroy {
   @HostListener('document:mouseleave')
   onMouseLeave(): void {
     this.targetScale = 1;
-    this.animateCursorScale();
     if (this.cursorRafId !== undefined) {
       cancelAnimationFrame(this.cursorRafId);
       this.cursorRafId = undefined;
@@ -188,7 +189,6 @@ export class App implements OnDestroy {
     const target = event.target as HTMLElement;
     if (target.closest('a[href], button, [role="button"]')) {
       this.targetScale = 1.67;
-      this.animateCursorScale();
     }
   }
 
@@ -197,56 +197,32 @@ export class App implements OnDestroy {
     const target = event.target as HTMLElement;
     if (target.closest('a[href], button, [role="button"]')) {
       this.targetScale = 1;
-      this.animateCursorScale();
     }
   }
 
   @HostListener('document:mousedown')
   onMouseDown(): void {
     this.targetScale = 0.7;
-    this.animateCursorScale();
   }
 
   @HostListener('document:mouseup')
   onMouseUp(): void {
     this.targetScale = 1;
-    this.animateCursorScale();
   }
 
   private startCursorLoop(): void {
-    if (!this.cursorEl) {
-      this.cursorEl = document.querySelector('.cursor-follower') as HTMLElement | undefined;
-    }
-    if (this.cursorRafId !== undefined) {
+    const cursorEl = this.cursorFollower?.nativeElement;
+    if (!cursorEl || this.cursorRafId !== undefined) {
       return;
     }
     const loop = () => {
       this.cursorX += (this.mouseX - this.cursorX) * 0.15;
       this.cursorY += (this.mouseY - this.cursorY) * 0.15;
       this.scaleT += (this.targetScale - this.scaleT) * 0.2;
-      this.cursorEl!.style.transform = `translate(${this.cursorX.toFixed(2)}px, ${this.cursorY.toFixed(2)}px) translate(-50%, -50%) scale(${this.scaleT.toFixed(3)})`;
+      cursorEl.style.transform = `translate(${this.cursorX.toFixed(2)}px, ${this.cursorY.toFixed(2)}px) translate(-50%, -50%) scale(${this.scaleT.toFixed(3)})`;
       this.cursorRafId = requestAnimationFrame(loop);
     };
     this.cursorRafId = requestAnimationFrame(loop);
-  }
-
-  private animateCursorScale(): void {
-    if (!this.cursorEl) {
-      return;
-    }
-    this.cursorAnim?.cancel();
-    this.cursorAnim = animate(this.cursorEl, {
-      scale: [this.scaleT, this.targetScale],
-      duration: 180,
-      easing: 'easeOutExpo',
-      update: ({ scale }) => {
-        this.scaleT = scale;
-        this.cursorEl!.style.transform = `translate(${this.cursorX.toFixed(2)}px, ${this.cursorY.toFixed(2)}px) translate(-50%, -50%) scale(${this.scaleT.toFixed(3)})`;
-      },
-      complete: () => {
-        this.cursorAnim = undefined;
-      },
-    });
   }
 
   async copyEmail(): Promise<void> {
@@ -282,13 +258,10 @@ export class App implements OnDestroy {
     if (this.expansionFallback !== undefined) {
       window.clearTimeout(this.expansionFallback);
     }
-    if (this.expansionTimeoutId !== undefined) {
-      window.clearTimeout(this.expansionTimeoutId);
-    }
     if (this.cursorRafId !== undefined) {
       cancelAnimationFrame(this.cursorRafId);
     }
-    this.cursorAnim?.cancel();
+    this.loaderAnim?.cancel();
   }
 
   private expandLoaderWithAnime(): void {
@@ -299,31 +272,33 @@ export class App implements OnDestroy {
       return;
     }
 
-    this.cursorAnim?.cancel();
-    this.cursorAnim = animate(progressEl, {
-      width: { value: '100vw', duration: 760, easing: 'easeOutExpo' },
-      height: { value: '100dvh', duration: 760, easing: 'easeOutExpo' },
-      borderRadius: { value: '0', duration: 760, easing: 'easeOutExpo' },
-      backgroundColor: { value: accent, duration: 300, easing: 'linear' },
-      complete: () => {
-        this.fadeLoaderText();
+    this.loaderAnim?.cancel();
+    this.loaderAnim = animate(progressEl, {
+      width: { to: '100vw', duration: 760, ease: 'outExpo' },
+      height: { to: '100dvh', duration: 760, ease: 'outExpo' },
+      borderRadius: { to: '0', duration: 760, ease: 'outExpo' },
+      backgroundColor: { to: accent, duration: 300, ease: 'linear' },
+      onComplete: () => {
+        this.revealSiteOverlay();
       },
     });
   }
 
-  private fadeLoaderText(): void {
-    const copyEl = document.querySelector<HTMLElement>('.initial-loader__copy');
-    const valueEl = document.querySelector<HTMLElement>('.initial-loader__value');
-    if (!copyEl || !valueEl) {
+  private revealSiteOverlay(): void {
+    this.siteReveal.reveal();
+
+    const overlay = document.querySelector<HTMLElement>('.initial-loader');
+    if (!overlay) {
       this.finishInitialLoader();
       return;
     }
 
-    animate([copyEl, valueEl], {
+    this.loaderAnim?.cancel();
+    this.loaderAnim = animate(overlay, {
       opacity: [1, 0],
-      duration: 300,
-      easing: 'easeInQuad',
-      complete: () => {
+      duration: 500,
+      ease: 'out(2)',
+      onComplete: () => {
         this.finishInitialLoader();
       },
     });
@@ -350,10 +325,7 @@ export class App implements OnDestroy {
       return;
     }
 
-    await Promise.all([
-      this.initialNavigationReady,
-      document.fonts?.ready ?? Promise.resolve(),
-    ]);
+    await Promise.all([this.initialNavigationReady, document.fonts?.ready ?? Promise.resolve()]);
 
     const remainingDisplayTime = 1200 - (performance.now() - startedAt);
     if (remainingDisplayTime > 0) {
@@ -398,6 +370,7 @@ export class App implements OnDestroy {
       this.expansionFallback = undefined;
     }
 
+    this.siteReveal.reveal();
     this.initialLoaderComplete.set(true);
   }
 

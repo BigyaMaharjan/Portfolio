@@ -1,7 +1,7 @@
 <div
   class="app-shell"
-  [attr.inert]="initialLoaderComplete() ? null : ''"
-  [attr.aria-hidden]="initialLoaderComplete() ? null : 'true'"
+  [attr.inert]="siteRevealed() ? null : ''"
+  [attr.aria-hidden]="siteRevealed() ? null : 'true'"
 >
   <a class="skip-link" href="#main-content">Skip to content</a>
 
@@ -142,7 +142,8 @@
     aria-valuemin="0"
     aria-valuemax="100"
     [attr.aria-valuenow]="scrollProgress()"
+    [style.width.%]="scrollProgress()"
   ></div>
 
-  <div class="cursor-follower" aria-hidden="true"></div>
+  <div #cursorFollower class="cursor-follower" aria-hidden="true"></div>
 </div>

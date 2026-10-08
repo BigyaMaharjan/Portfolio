@@ -1233,7 +1233,7 @@
 
 /* --- cursor follower (negative/inverted color effect) --- */
 :root {
-  --cursor-visible: 0;
+  --cursor-visible: hidden;
 }
 
 .cursor-follower {
@@ -1253,7 +1253,7 @@
   /* Negative color: invert whatever is behind the circle (transparent areas). */
   backdrop-filter: invert(1);
   -webkit-backdrop-filter: invert(1);
-  display: var(--cursor-visible, 0);
+  visibility: var(--cursor-visible, hidden);
 }
 
 :host-context(html[data-motion='reduce']) .cursor-follower,
@@ -1264,4 +1264,3 @@
 :host-context(html[data-motion='reduce']) .scroll-progress-bar {
   transition: none;
 }
-

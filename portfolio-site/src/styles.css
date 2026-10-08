@@ -117,6 +117,16 @@ summary:focus-visible,
   outline-offset: 4px;
 }
 
+@media (pointer: fine) {
+  html[data-motion='full'],
+  html[data-motion='full'] * {
+    cursor: none !important;
+  }
+  html[data-motion='full'] :is(input, textarea, select, [contenteditable='true']) {
+    cursor: auto !important;
+  }
+}
+
 ::selection {
   background: var(--accent);
   color: #10201b;
