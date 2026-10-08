@@ -1130,3 +1130,138 @@
     grid-column: auto;
   }
 }
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.initial-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  background: var(--canvas);
+  color: var(--text-primary);
+}
+
+.initial-loader__copy,
+.initial-loader__value {
+  position: absolute;
+  left: 50%;
+  z-index: 3;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition: opacity var(--duration-ui) ease;
+}
+
+.initial-loader__copy {
+  top: calc(50% - 48px);
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.initial-loader__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.initial-loader__brand:first-letter {
+  color: var(--accent);
+}
+
+.initial-loader__brand span {
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.initial-loader__caption {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+.initial-loader__progress {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  width: min(360px, calc(100vw - 48px));
+  height: 5px;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface-raised));
+}
+
+.initial-loader__fill {
+  width: 0;
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: var(--accent);
+  transition: width 420ms var(--ease-standard);
+}
+
+.initial-loader__value {
+  top: calc(50% + 17px);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+.initial-loader__copy.is-fading,
+.initial-loader__value.is-fading {
+  opacity: 0;
+}
+
+/* --- scroll progress bar (top of page) --- */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent);
+  z-index: 300;
+  transition: width 40ms linear;
+}
+
+/* --- cursor follower (negative/inverted color effect) --- */
+:root {
+  --cursor-visible: 0;
+}
+
+.cursor-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  box-sizing: border-box;
+  pointer-events: none;
+  z-index: 1000;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform;
+  /* Negative color: invert whatever is behind the circle (transparent areas). */
+  backdrop-filter: invert(1);
+  -webkit-backdrop-filter: invert(1);
+  display: var(--cursor-visible, 0);
+}
+
+:host-context(html[data-motion='reduce']) .cursor-follower,
+:host-context(html[data-motion='reduce']) .scroll-progress-bar {
+  display: none;
+}
+
+:host-context(html[data-motion='reduce']) .scroll-progress-bar {
+  transition: none;
+}
+

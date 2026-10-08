@@ -1,102 +1,148 @@
-<a class="skip-link" href="#main-content">Skip to content</a>
+<div
+  class="app-shell"
+  [attr.inert]="initialLoaderComplete() ? null : ''"
+  [attr.aria-hidden]="initialLoaderComplete() ? null : 'true'"
+>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-<header class="site-header" [class.is-compact]="compactHeader()">
-  <div class="site-header__inner">
-    <a class="brand" routerLink="/" aria-label="Bigya Maharjan home" (click)="closeMenu()">
-      <span class="brand__monogram" aria-hidden="true">BM</span>
-      <span class="brand__text"
-        >{{ profile.name }}<span>{{ profile.title }}</span></span
-      >
-    </a>
+  <header class="site-header" [class.is-compact]="compactHeader()">
+    <div class="site-header__inner">
+      <a class="brand" routerLink="/" aria-label="Bigya Maharjan home" (click)="closeMenu()">
+        <span class="brand__monogram" aria-hidden="true">BM</span>
+        <span class="brand__text"
+          >{{ profile.name }}<span>{{ profile.title }}</span></span
+        >
+      </a>
 
-    <button
-      #menuButton
-      class="menu-toggle"
-      type="button"
-      aria-controls="primary-navigation"
-      [attr.aria-expanded]="menuOpen()"
-      [attr.aria-label]="menuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
-      (click)="toggleMenu()"
-    >
-      <span>{{ menuOpen() ? 'Close' : 'Menu' }}</span>
-      <span class="menu-toggle__icon" aria-hidden="true">{{
-        menuOpen() ? '&#10005;' : '&#9776;'
-      }}</span>
-    </button>
-
-    <button
-      class="site-header__scrim"
-      type="button"
-      aria-label="Close navigation"
-      [class.is-open]="menuOpen()"
-      (click)="closeMenu()"
-    ></button>
-
-    <nav
-      #primaryNav
-      id="primary-navigation"
-      class="main-nav"
-      [class.is-open]="menuOpen()"
-      aria-label="Primary navigation"
-    >
-      <a routerLink="/" fragment="work" (click)="closeMenu()">Work</a>
-      <a routerLink="/" fragment="experience" (click)="closeMenu()">Experience</a>
-      <a routerLink="/" fragment="about" (click)="closeMenu()">About</a>
-      <a routerLink="/resume" (click)="closeMenu()">Résumé</a>
       <button
-        class="theme-toggle"
+        #menuButton
+        class="menu-toggle"
         type="button"
-        [attr.aria-label]="
-          themePreference.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-        "
-        [title]="
-          themePreference.theme() === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'
-        "
-        (click)="themePreference.toggle()"
+        aria-controls="primary-navigation"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? 'Close navigation menu' : 'Open navigation menu'"
+        (click)="toggleMenu()"
       >
-        <span aria-hidden="true">{{
-          themePreference.theme() === 'dark' ? '&#9788;' : '&#9790;'
+        <span>{{ menuOpen() ? 'Close' : 'Menu' }}</span>
+        <span class="menu-toggle__icon" aria-hidden="true">{{
+          menuOpen() ? '&#10005;' : '&#9776;'
         }}</span>
-        <span>{{ themePreference.theme() === 'dark' ? 'Light' : 'Dark' }}</span>
       </button>
-      <a class="nav-cta" routerLink="/" fragment="contact" (click)="closeMenu()"
-        >Let's talk <span aria-hidden="true">&#8599;</span></a
-      >
-    </nav>
-  </div>
-</header>
 
-<main id="main-content" tabindex="-1">
-  <router-outlet />
-</main>
-
-<footer class="site-footer">
-  <div class="site-footer__inner">
-    <div class="footer-identity">
-      <a class="footer-name" routerLink="/">{{ profile.name }}</a>
-      <p>{{ profile.title }} <span aria-hidden="true">·</span> {{ profile.location }}</p>
-    </div>
-    <div class="footer-socials" aria-label="Social profiles">
-      <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
-        >GitHub <span aria-hidden="true">&#8599;</span></a
-      >
-      <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
-        >LinkedIn <span aria-hidden="true">&#8599;</span></a
-      >
-    </div>
-    <div class="footer-controls">
       <button
-        class="footer-control"
+        class="site-header__scrim"
         type="button"
-        [attr.aria-pressed]="motionPreference.reducedMotion()"
-        (click)="motionPreference.toggle()"
+        aria-label="Close navigation"
+        [class.is-open]="menuOpen()"
+        (click)="closeMenu()"
+      ></button>
+
+      <nav
+        #primaryNav
+        id="primary-navigation"
+        class="main-nav"
+        [class.is-open]="menuOpen()"
+        aria-label="Primary navigation"
       >
-        {{ motionPreference.reducedMotion() ? 'Reduced motion on' : 'Reduce motion' }}
-      </button>
-      <a class="back-to-top" href="#main-content"
-        >Back to top <span aria-hidden="true">&#8593;</span></a
-      >
+        <a routerLink="/" fragment="work" (click)="closeMenu()">Work</a>
+        <a routerLink="/" fragment="experience" (click)="closeMenu()">Experience</a>
+        <a routerLink="/" fragment="about" (click)="closeMenu()">About</a>
+        <a routerLink="/resume" (click)="closeMenu()">Résumé</a>
+        <button
+          class="theme-toggle"
+          type="button"
+          [attr.aria-label]="
+            themePreference.theme() === 'dark' ? 'Switch to light theme' : 'Switch to light theme'
+          "
+          [title]="
+            themePreference.theme() === 'dark' ? 'Switch to light theme' : 'Switch to light theme'
+          "
+          (click)="themePreference.toggle()"
+        >
+          <span aria-hidden="true">{{
+            themePreference.theme() === 'dark' ? '&#9788;' : '&#9790;'
+          }}</span>
+          <span>{{ themePreference.theme() === 'dark' ? 'Light' : 'Dark' }}</span>
+        </button>
+        <a class="nav-cta" routerLink="/" fragment="contact" (click)="closeMenu()"
+          >Let's talk <span aria-hidden="true">&#8599;</span></a
+        >
+      </nav>
     </div>
-  </div>
-  <p class="footer-copyright">© {{ currentYear }} {{ profile.name }}</p>
-</footer>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <router-outlet />
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-identity">
+        <a class="footer-name" routerLink="/">{{ profile.name }}</a>
+        <p>{{ profile.title }} <span aria-hidden="true">·</span> {{ profile.location }}</p>
+      </div>
+      <div class="footer-socials" aria-label="Social profiles">
+        <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
+          >GitHub <span aria-hidden="true">&#8599;</span></a
+        >
+        <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
+          >LinkedIn <span aria-hidden="true">&#8599;</span></a
+        >
+      </div>
+      <div class="footer-controls">
+        <button
+          class="footer-control"
+          type="button"
+          [attr.aria-pressed]="motionPreference.reducedMotion()"
+          (click)="motionPreference.toggle()"
+        >
+          {{ motionPreference.reducedMotion() ? 'Reduced motion on' : 'Reduce motion' }}
+        </button>
+        <a class="back-to-top" href="#main-content"
+          >Back to top <span aria-hidden="true">&#8593;</span></a
+        >
+      </div>
+    </div>
+    <p class="footer-copyright">© {{ currentYear }} {{ profile.name }}</p>
+  </footer>
+
+  @if (showInitialLoader() && !initialLoaderComplete()) {
+    <div
+      class="initial-loader"
+      [class.is-expanding]="initialLoaderExpanding()"
+      role="status"
+      aria-live="polite"
+      aria-label="Loading Bigya Maharjan's portfolio"
+    >
+      <div class="initial-loader__copy" [class.is-fading]="initialLoaderExpanding()">
+        <span class="initial-loader__brand">BM <span>Bigya Maharjan</span></span>
+        <span class="initial-loader__caption">Preparing your workspace</span>
+      </div>
+      <div
+        class="initial-loader__progress"
+        role="progressbar"
+        aria-label="Portfolio loading progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [attr.aria-valuenow]="loaderProgress()"
+        (transitionend)="handleLoaderTransition($event)"
+      >
+        <span class="initial-loader__fill" [style.width.%]="loaderProgress()"></span>
+      </div>
+      <span class="initial-loader__value" [class.is-fading]="initialLoaderExpanding()">
+        {{ loaderProgress() }}%
+      </span>
+    </div>
+  }
+
+  <div
+    class="scroll-progress-bar"
+    role="progressbar"
+    aria-label="Scroll progress"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    [attr.aria-valuenow]="scrollProgress()"
+  ></div>
+
+  <div class="cursor-follower" aria-hidden="true"></div>
+</div>
