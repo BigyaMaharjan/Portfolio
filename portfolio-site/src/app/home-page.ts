@@ -4,14 +4,12 @@ import {
   Component,
   ElementRef,
   OnDestroy,
-  effect,
   inject,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { animate, stagger } from 'animejs';
 import { MotionPreferenceService } from './core/motion-preference.service';
-import { SiteRevealService } from './core/site-reveal.service';
 import { capabilityGroups } from './data/capabilities.data';
 import { education, experience, experienceSectors, systemTypes } from './data/experience.data';
 import { profile } from './data/profile.data';
@@ -27,9 +25,7 @@ import { projects } from './data/projects.data';
 export class HomePage implements AfterViewInit, OnDestroy {
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly motionPreference = inject(MotionPreferenceService);
-  private readonly siteReveal = inject(SiteRevealService);
   private observer?: IntersectionObserver;
-  private entranceStarted = false;
 
   readonly profile = profile;
   readonly capabilities = capabilityGroups;
@@ -41,20 +37,6 @@ export class HomePage implements AfterViewInit, OnDestroy {
   readonly copyStatus = signal('');
 
   ngAfterViewInit(): void {
-    effect(() => {
-      if (!this.siteReveal.revealed() || this.entranceStarted) {
-        return;
-      }
-      this.entranceStarted = true;
-      this.playEntranceAnimations();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
-  }
-
-  private playEntranceAnimations(): void {
     if (this.motionPreference.reducedMotion()) {
       return;
     }
@@ -94,6 +76,10 @@ export class HomePage implements AfterViewInit, OnDestroy {
     );
 
     revealItems.forEach((item) => this.observer?.observe(item));
+  }
+
+  ngOnDestroy(): void {
+    this.observer?.disconnect();
   }
 
   async copyEmail(): Promise<void> {
