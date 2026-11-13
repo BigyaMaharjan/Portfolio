@@ -34,8 +34,6 @@ export class App {
   readonly motionPreference = inject(MotionPreferenceService);
   readonly profile = profile;
   readonly menuOpen = signal(false);
-  readonly compactHeader = signal(false);
-  readonly copyStatus = signal('');
   readonly currentYear = new Date().getFullYear();
 
   @ViewChild('primaryNav') private primaryNav?: ElementRef<HTMLElement>;
@@ -45,7 +43,7 @@ export class App {
     effect(() => {
       this.meta.updateTag({
         name: 'theme-color',
-        content: this.themePreference.theme() === 'dark' ? '#111817' : '#f4f7f5',
+        content: this.themePreference.theme() === 'dark' ? '#0b100e' : '#f5f4ed',
       });
     });
 
@@ -60,11 +58,6 @@ export class App {
         this.updatePageMetadata(event.urlAfterRedirects);
         this.scrollToFragment(event.urlAfterRedirects);
       });
-  }
-
-  @HostListener('window:scroll')
-  updateHeaderState(): void {
-    this.compactHeader.set(window.scrollY > 12);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -120,15 +113,6 @@ export class App {
     }
   }
 
-  async copyEmail(): Promise<void> {
-    try {
-      await navigator.clipboard.writeText(this.profile.email);
-      this.copyStatus.set('Email copied');
-    } catch {
-      this.copyStatus.set('Copy unavailable. Email: ' + this.profile.email);
-    }
-  }
-
   private updatePageMetadata(url: string): void {
     let route = this.router.routerState.snapshot.root;
     while (route.firstChild) {
@@ -138,8 +122,8 @@ export class App {
     const project = route.paramMap.get('slug');
     const caseStudy = project ? projects.find((item) => item.slug === project) : undefined;
     const pageTitle = caseStudy
-      ? `${caseStudy.name} — Case Study | ${profile.name}`
-      : (route.title ?? 'Bigya Maharjan — Backend Software Developer');
+      ? `${caseStudy.name} | Case Study | ${profile.name}`
+      : (route.title ?? 'Bigya Maharjan | Backend Software Developer');
     const description =
       caseStudy?.oneLiner ??
       (route.data['description'] as string) ??
@@ -169,9 +153,7 @@ export class App {
         return;
       }
 
-      const headerHeight =
-        document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0;
-      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
       window.scrollTo({ top: Math.max(0, targetTop), behavior: 'instant' });
     }, 0);
   }

@@ -56,7 +56,11 @@
               }
             ],
             "styles": [
+              "src/vendor/scrollcraft/scrollcraft.css",
               "src/styles.css"
+            ],
+            "scripts": [
+              "src/vendor/scrollcraft/scrollcraft.js"
             ]
           },
           "configurations": {
