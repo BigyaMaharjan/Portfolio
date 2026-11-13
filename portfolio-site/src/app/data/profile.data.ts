@@ -1,4 +1,4 @@
-import type { Education, Metric, Profile } from './portfolio.models';
+import type { Profile } from './portfolio.models';
 
 export const profile: Profile = {
   name: 'Bigya Maharjan',
@@ -15,41 +15,6 @@ export const profile: Profile = {
     github: 'https://github.com/BigyaMaharjan',
     linkedin: 'https://www.linkedin.com/in/bigya-maharjan-b7441b299/',
   },
-  heroMetrics: [
-    { value: '15+', label: 'core .NET modules optimized', note: 'Résumé-reported' },
-    { value: '20%', label: 'reduction in response times', note: 'Across core module optimization' },
-    {
-      value: '30%',
-      label: 'increase in functionality coverage',
-      note: 'Across client environments',
-    },
-  ] satisfies readonly Metric[],
   focusAreas: ['FinTech', 'Distributed systems', 'APIs & platform engineering', 'Microservices'],
 };
 
-export const education: readonly Education[] = [
-  {
-    institution: 'Patan Multiple Campus',
-    credential: "Bachelor's in Computer Science Information Technology",
-    location: 'Lalitpur, Nepal',
-    graduation: 'April 2023',
-  },
-];
-
-export const approachSteps = [
-  {
-    id: 'understand',
-    title: 'Understand the system',
-    description: 'Find the underlying behavior, constraints, and opportunities to improve.',
-  },
-  {
-    id: 'build',
-    title: 'Build with care',
-    description: 'Use .NET and clear backend design to solve the problem at hand.',
-  },
-  {
-    id: 'improve',
-    title: 'Keep improving',
-    description: 'Learn from how systems behave and make the next change better.',
-  },
-] as const;
