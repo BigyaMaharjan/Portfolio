@@ -40,12 +40,12 @@ export class HomePage implements AfterViewInit, OnDestroy {
 
   readonly timeline = [
     {
-      when: '2023',
-      title: education[0].credential,
-      org: `${education[0].institution} / ${education[0].location}`,
-      detail: `Graduated ${education[0].graduation}. Where the curiosity about how systems work started.`,
-      stack: [] as readonly string[],
-      current: false,
+      when: 'Jan 2024 - Present',
+      title: experience[0].role,
+      org: `${experience[0].company} / ${experience[0].location}`,
+      detail: experience[0].summary,
+      stack: experience[0].stack,
+      current: true,
     },
     {
       when: 'May - Aug 2023',
@@ -56,12 +56,12 @@ export class HomePage implements AfterViewInit, OnDestroy {
       current: false,
     },
     {
-      when: 'Jan 2024 - Present',
-      title: experience[0].role,
-      org: `${experience[0].company} / ${experience[0].location}`,
-      detail: experience[0].summary,
-      stack: experience[0].stack,
-      current: true,
+      when: '2023',
+      title: education[0].credential,
+      org: `${education[0].institution} / ${education[0].location}`,
+      detail: `Graduated ${education[0].graduation}. Where the curiosity about how systems work started.`,
+      stack: [] as readonly string[],
+      current: false,
     },
   ] as const;
 
