@@ -1,5 +1,13 @@
 <a class="skip-link" href="#main-content">Skip to content</a>
 
+<div class="aurora" aria-hidden="true">
+  <span class="aurora__blob aurora__blob--a"></span>
+  <span class="aurora__blob aurora__blob--b"></span>
+  <span class="aurora__blob aurora__blob--c"></span>
+  <span class="aurora__grid"></span>
+  <span class="aurora__glow"></span>
+</div>
+
 <header class="site-header">
   <div class="site-header__inner">
     <a class="brand" routerLink="/" aria-label="Bigya Maharjan home" (click)="closeMenu()">
@@ -39,9 +47,10 @@
       [class.is-open]="menuOpen()"
       aria-label="Primary navigation"
     >
-      <a routerLink="/" fragment="systems" (click)="closeMenu()">Systems</a>
-      <a routerLink="/" fragment="method" (click)="closeMenu()">Method</a>
-      <a routerLink="/" fragment="evidence" (click)="closeMenu()">Evidence</a>
+      <a routerLink="/" fragment="about" (click)="closeMenu()">About</a>
+      <a routerLink="/" fragment="stack" (click)="closeMenu()">Stack</a>
+      <a routerLink="/" fragment="work" (click)="closeMenu()">Work</a>
+      <a routerLink="/" fragment="journey" (click)="closeMenu()">Journey</a>
       <a routerLink="/resume" (click)="closeMenu()">Résumé</a>
       <button
         class="theme-toggle"

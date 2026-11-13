@@ -35,6 +35,7 @@ export class App {
   readonly profile = profile;
   readonly menuOpen = signal(false);
   readonly currentYear = new Date().getFullYear();
+  private readonly pointerFine = window.matchMedia('(pointer: fine)').matches;
 
   @ViewChild('primaryNav') private primaryNav?: ElementRef<HTMLElement>;
   @ViewChild('menuButton') private menuButton?: ElementRef<HTMLButtonElement>;
@@ -43,7 +44,7 @@ export class App {
     effect(() => {
       this.meta.updateTag({
         name: 'theme-color',
-        content: this.themePreference.theme() === 'dark' ? '#0b100e' : '#f5f4ed',
+        content: this.themePreference.theme() === 'dark' ? '#070912' : '#f5f7ff',
       });
     });
 
@@ -58,6 +59,17 @@ export class App {
         this.updatePageMetadata(event.urlAfterRedirects);
         this.scrollToFragment(event.urlAfterRedirects);
       });
+  }
+
+  @HostListener('document:pointermove', ['$event'])
+  handlePointerMove(event: PointerEvent): void {
+    if (!this.pointerFine) {
+      return;
+    }
+
+    document.documentElement.style.setProperty('--pointer-x', `${event.clientX}px`);
+    document.documentElement.style.setProperty('--pointer-y', `${event.clientY}px`);
+    document.documentElement.classList.add('pointer-active');
   }
 
   @HostListener('document:keydown', ['$event'])

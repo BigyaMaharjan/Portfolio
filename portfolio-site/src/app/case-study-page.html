@@ -1,6 +1,6 @@
 <section class="case-page page-wrap" aria-labelledby="case-title">
   @if (project(); as item) {
-    <a class="back-link" routerLink="/" fragment="systems">&#8592; All work</a>
+    <a class="back-link" routerLink="/" fragment="work">&#8592; All work</a>
     <header class="case-hero">
       <p class="eyebrow">
         {{ item.eyebrow }} <span aria-hidden="true">·</span> {{ item.category }}
@@ -63,66 +63,8 @@
       </section>
       <section class="case-section case-section--wide">
         <p class="eyebrow">II / System design</p>
-        <h2>Architecture</h2>
+        <h2>How it works</h2>
         <p>{{ item.architecture }}</p>
-        <figure class="architecture-figure">
-          <svg
-            [attr.viewBox]="
-              '0 0 ' + item.architectureDiagram.width + ' ' + item.architectureDiagram.height
-            "
-            role="img"
-            aria-labelledby="architecture-title architecture-description"
-          >
-            <title id="architecture-title">{{ item.architectureDiagram.title }}</title>
-            <desc id="architecture-description">{{ item.architectureDiagram.description }}</desc>
-            @for (edge of item.architectureDiagram.edges; track edge.id) {
-              <line
-                class="architecture-edge"
-                [attr.x1]="edge.x1"
-                [attr.y1]="edge.y1"
-                [attr.x2]="edge.x2"
-                [attr.y2]="edge.y2"
-              />
-              @if (edge.label) {
-                <text
-                  class="architecture-edge__label"
-                  [attr.x]="(edge.x1 + edge.x2) / 2"
-                  [attr.y]="(edge.y1 + edge.y2) / 2 - 8"
-                >
-                  {{ edge.label }}
-                </text>
-              }
-            }
-            @for (node of item.architectureDiagram.nodes; track node.id) {
-              <g [class]="'architecture-node architecture-node--' + node.kind">
-                <rect
-                  [attr.x]="node.x"
-                  [attr.y]="node.y"
-                  [attr.width]="node.width"
-                  [attr.height]="node.height"
-                  rx="12"
-                />
-                <text
-                  class="architecture-node__label"
-                  [attr.x]="node.x + node.width / 2"
-                  [attr.y]="node.y + node.height / 2 - (node.detail ? 4 : -4)"
-                >
-                  {{ node.label }}
-                </text>
-                @if (node.detail) {
-                  <text
-                    class="architecture-node__detail"
-                    [attr.x]="node.x + node.width / 2"
-                    [attr.y]="node.y + node.height / 2 + 15"
-                  >
-                    {{ node.detail }}
-                  </text>
-                }
-              </g>
-            }
-          </svg>
-          <figcaption>{{ item.architectureDiagram.caption }}</figcaption>
-        </figure>
       </section>
       <section class="case-section">
         <p class="eyebrow">III / Trade-offs</p>
@@ -211,7 +153,7 @@
         Project details are only shown once they're ready to share. Nothing has been filled with
         placeholder employers, metrics, or architecture claims.
       </p>
-      <a class="button button--primary" routerLink="/" fragment="systems"
+      <a class="button button--primary" routerLink="/" fragment="work"
         >Back to selected work <span aria-hidden="true">&#8594;</span></a
       >
     </div>

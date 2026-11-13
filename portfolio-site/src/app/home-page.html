@@ -1,503 +1,266 @@
-<div class="casebook" [class.is-static]="staticMode()">
-  <nav class="trace" aria-label="Chapter navigation">
-    <div class="trace__top">
-      <span class="trace__caption">System trace</span>
-      <span class="trace__current" data-trace-current>{{ chapters[0].num }} / {{ chapters[0].name }}</span>
-    </div>
-    <span class="trace__line" aria-hidden="true"><span class="trace__fill"></span></span>
-    <ol class="trace__chapters">
-      @for (chapter of chapters; track chapter.id) {
-        <li>
-          <a [href]="'#' + chapter.id" [attr.data-trace]="chapter.id">
-            <span class="trace__num">{{ chapter.num }}</span>
-            <span class="trace__name">{{ chapter.name }}</span>
-          </a>
-        </li>
-      }
-    </ol>
-  </nav>
-
-  <section id="top" class="title-page" aria-labelledby="hero-title">
-    <div class="page-shell title-page__grid">
-      <div class="title-page__main">
-        <p class="title-page__kicker">Bigya Maharjan / Backend engineer / Kathmandu</p>
-        <h1 id="hero-title">
-          Backend systems<br />
-          that <em>hold up.</em>
+<div class="home" [class.is-static]="staticMode()">
+  <section id="top" class="hero" aria-labelledby="hero-title">
+    <div class="page-shell hero__grid">
+      <div class="hero__copy" data-sc-in>
+        <p class="eyebrow hero__eyebrow">{{ profile.title }} / {{ profile.location }}</p>
+        <h1 id="hero-title" class="hero__title">
+          I build backend systems
+          <span class="gradient-text">that hold up.</span>
         </h1>
-        <p class="title-page__lede">
-          I build and improve .NET systems across banking, telecom, government, and SaaS: APIs,
-          background jobs, data paths, and the seams between them.
-        </p>
-        <div class="title-page__actions">
-          <a class="action action--solid" href="#systems">Read the casebook <span aria-hidden="true">&#8595;</span></a>
-          <a class="action" [href]="profile.resumeUrl" download>Download résumé <span aria-hidden="true">&#8599;</span></a>
-        </div>
-        <div class="title-page__socials" aria-label="Contact links">
-          <a [href]="'mailto:' + profile.email">Email <span aria-hidden="true">&#8599;</span></a>
-          <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
-            >GitHub <span aria-hidden="true">&#8599;</span></a
+        <p class="hero__lede">{{ profile.longBio }}</p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#work"
+            >See my work <span aria-hidden="true">&#8595;</span></a
           >
-          <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
-            >LinkedIn <span aria-hidden="true">&#8599;</span></a
+          <a class="button button--ghost" [href]="profile.resumeUrl" download
+            >Download résumé <span aria-hidden="true">&#8599;</span></a
           >
         </div>
-      </div>
-
-      <aside class="title-page__folio" aria-label="Portfolio index">
-        <div class="folio__row">
-          <span>Selected systems</span>
-          <strong>{{ projects.length.toString().padStart(2, '0') }}</strong>
-        </div>
-        <div class="folio__row">
-          <span>Domains</span>
-          <strong>{{ experienceSectors.join(' / ') }}</strong>
-        </div>
-        <div class="folio__row">
-          <span>Based</span>
-          <strong>{{ profile.location }}</strong>
-        </div>
-        <div class="folio__row">
-          <span>Availability</span>
-          <strong>{{ profile.availability }}</strong>
-        </div>
-        <span class="folio__line" aria-hidden="true"></span>
-        <p>
-          The work is the argument. Follow five systems, one method, and the evidence behind them.
-        </p>
-        <span class="folio__coords">27.7172 N / 85.3240 E</span>
-      </aside>
-    </div>
-
-    <div class="title-page__bottom page-shell" aria-hidden="true">
-      <span>Portfolio / 2026</span>
-      <span>Scroll to inspect</span>
-    </div>
-  </section>
-
-  <section id="systems" class="systems" aria-labelledby="systems-title" data-sc-act="flow">
-    <div class="page-shell">
-      <header class="chapter-head">
-        <span class="chapter-head__folio">I</span>
-        <div class="chapter-head__title">
-          <p class="chapter-head__label">Selected systems</p>
-          <h2 id="systems-title">Five systems,<br />one operating instinct.</h2>
-        </div>
-        <p class="chapter-head__note">
-          The useful detail is rarely the happy path. It is the queue, the threshold, the retry,
-          and the query under load. These plates are drawn at the level the résumé supports.
-        </p>
-      </header>
-
-      <div class="plates">
-        @for (project of projects; track project.slug; let i = $index) {
-          <article class="plate" [class.plate--flip]="i % 2 === 1" data-sc-in>
-            <div class="plate__meta">
-              <span class="plate__mark">{{ plateLetters[i] }}</span>
-              <span>{{ project.category }}</span>
-            </div>
-
-            <div class="plate__copy">
-              <h3>
-                <a [routerLink]="['/work', project.slug]">{{ project.name }}</a>
-              </h3>
-              <p class="plate__lead">{{ project.oneLiner }}</p>
-              <dl class="plate__facts">
-                <div>
-                  <dt>Role</dt>
-                  <dd>{{ project.role }}</dd>
-                </div>
-                <div>
-                  <dt>Stack</dt>
-                  <dd>{{ project.stack.join(' / ') }}</dd>
-                </div>
-                <div>
-                  <dt>Context</dt>
-                  <dd>{{ project.context }}</dd>
-                </div>
-              </dl>
-              <a class="text-link" [routerLink]="['/work', project.slug]"
-                >Read case study <span aria-hidden="true">&#8599;</span></a
-              >
-            </div>
-
-            <figure class="plate__figure">
-              <div class="plate__figure-head">
-                <span>System map / {{ plateLetters[i] }}</span>
-                <span>Representative</span>
-              </div>
-              <svg
-                [attr.viewBox]="'0 0 ' + project.architectureDiagram.width + ' ' + project.architectureDiagram.height"
-                role="img"
-                [attr.aria-labelledby]="'diagram-title-' + project.slug"
-                preserveAspectRatio="xMidYMid meet"
-              >
-                <title [attr.id]="'diagram-title-' + project.slug">{{ project.architectureDiagram.title }}</title>
-                <desc>{{ project.architectureDiagram.description }}</desc>
-                <g class="diagram__edges">
-                  @for (edge of project.architectureDiagram.edges; track edge.id) {
-                    <line
-                      [attr.x1]="edge.x1"
-                      [attr.y1]="edge.y1"
-                      [attr.x2]="edge.x2"
-                      [attr.y2]="edge.y2"
-                    />
-                    @if (edge.label) {
-                      <text
-                        class="diagram__edge-label"
-                        [attr.x]="(edge.x1 + edge.x2) / 2"
-                        [attr.y]="(edge.y1 + edge.y2) / 2 - 6"
-                        text-anchor="middle"
-                      >
-                        {{ edge.label }}
-                      </text>
-                    }
-                  }
-                </g>
-                @for (node of project.architectureDiagram.nodes; track node.id) {
-                  <g class="diagram__node" [attr.data-kind]="node.kind">
-                    <rect
-                      [attr.x]="node.x"
-                      [attr.y]="node.y"
-                      [attr.width]="node.width"
-                      [attr.height]="node.height"
-                    />
-                    <text [attr.x]="node.x + 12" [attr.y]="node.y + 27">{{ node.label }}</text>
-                    <text class="diagram__detail" [attr.x]="node.x + 12" [attr.y]="node.y + 45">
-                      {{ node.detail }}
-                    </text>
-                  </g>
-                }
-              </svg>
-              <figcaption>{{ project.architectureDiagram.caption }}</figcaption>
-            </figure>
-          </article>
-        }
-      </div>
-    </div>
-  </section>
-
-  <section class="intertitle" aria-labelledby="intertitle-title">
-    <div class="page-shell">
-      <p class="intertitle__mark" aria-hidden="true">/</p>
-      <h2 id="intertitle-title">Most systems fail in the seams.</h2>
-      <p>
-        Between the API and the job. Between the job and the data. Between the data and the person
-        waiting for it.
-      </p>
-    </div>
-  </section>
-
-  <section id="method" class="method" data-sc-act="flow" aria-labelledby="method-title">
-    <div class="method__stage">
-      <div class="page-shell method__grid">
-        <div class="method__copy">
-          <header class="chapter-head chapter-head--compact">
-            <span class="chapter-head__folio">II</span>
-            <div class="chapter-head__title">
-              <p class="chapter-head__label">Method</p>
-              <h2 id="method-title">The work is<br />the system.</h2>
-            </div>
-          </header>
-
-          <p class="method__lede">
-            I look for the path a request actually takes. Then I make each step legible: where it
-            waits, where it can fail, and what the next engineer will inherit.
-          </p>
-
-          <ol class="method__steps">
-            @for (step of approachSteps; track step.id; let i = $index) {
-              <li [attr.data-method-step]="i" [class.is-active]="i === 0">
-                <span class="method__step-num">0{{ i + 1 }}</span>
-                <div>
-                  <h3>{{ step.title }}</h3>
-                  <p>{{ step.description }}</p>
-                </div>
-              </li>
-            }
-          </ol>
-        </div>
-
-        <figure class="method__figure" aria-labelledby="method-diagram-title">
-          <div class="method__figure-head">
-            <span>Request path / representative</span>
-            <span>02-03</span>
+        <div class="hero__meta">
+          <span class="hero__badge">
+            <span class="hero__dot" aria-hidden="true"></span>{{ profile.availability }}
+          </span>
+          <div class="hero__socials" aria-label="Contact links">
+            <a [href]="'mailto:' + profile.email">Email</a>
+            <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
+              >LinkedIn</a
+            >
           </div>
-          <svg
-            id="method-diagram"
-            viewBox="0 0 760 620"
-            role="img"
-            aria-labelledby="method-diagram-title method-diagram-desc"
-          >
-            <title id="method-diagram-title">Representative request path</title>
-            <desc id="method-diagram-desc">
-              A request moves from a client through an API and domain service to data, scheduled
-              work, events, and telemetry.
-            </desc>
-            <defs>
-              <pattern id="method-grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path class="method-grid-line" d="M40 0H0V40" fill="none" />
-              </pattern>
-            </defs>
-            <rect width="760" height="620" fill="url(#method-grid)" />
-            <text class="method-axis" x="24" y="34">REQUEST PATH / 760 x 620</text>
-            <text class="method-axis" x="736" y="596" text-anchor="end">TRACE 0.00 TO 1.00</text>
-
-            <g class="method-edges">
-              <path class="method-edge method-edge--quiet" d="M110 306H224" />
-              <path class="method-edge method-edge--quiet" d="M339 306H424" />
-              <path class="method-edge method-edge--quiet" d="M539 306H624" />
-              <path class="method-edge method-edge--quiet" d="M499 270V182H624" />
-              <path class="method-edge method-edge--quiet" d="M499 342V430H624" />
-              <path class="method-edge method-edge--quiet" d="M624 466H574V556" />
-              <path class="method-edge method-edge--quiet" d="M299 342V556H424" />
-
-              <path class="method-edge" data-draw d="M174 306H224" />
-              <path class="method-edge" data-draw d="M374 306H424" />
-              <path class="method-edge" data-draw d="M574 306H624" />
-              <path class="method-edge" data-draw d="M499 270V182H624" />
-              <path class="method-edge" data-draw d="M499 342V430H624" />
-              <path class="method-edge" data-draw d="M624 466H574V556" />
-              <path class="method-edge" data-draw d="M299 342V556H424" />
-            </g>
-
-            <g class="method-node" data-method-node="0">
-              <rect x="24" y="270" width="150" height="72" />
-              <text x="36" y="296">Request</text>
-              <text class="method-node__detail" x="36" y="315">client / intent</text>
-            </g>
-            <g class="method-node" data-method-node="1">
-              <rect x="224" y="270" width="150" height="72" />
-              <text x="236" y="296">API</text>
-              <text class="method-node__detail" x="236" y="315">auth + routing</text>
-            </g>
-            <g class="method-node" data-method-node="2">
-              <rect x="424" y="270" width="150" height="72" />
-              <text x="436" y="296">Domain</text>
-              <text class="method-node__detail" x="436" y="315">rules + services</text>
-            </g>
-            <g class="method-node" data-method-node="3">
-              <rect x="624" y="270" width="112" height="72" />
-              <text x="636" y="296">Data</text>
-              <text class="method-node__detail" x="636" y="315">SQL + cache</text>
-            </g>
-            <g class="method-node" data-method-node="4">
-              <rect x="624" y="110" width="112" height="72" />
-              <text x="636" y="136">Workflow</text>
-              <text class="method-node__detail" x="636" y="155">scheduled</text>
-            </g>
-            <g class="method-node" data-method-node="5">
-              <rect x="624" y="430" width="112" height="72" />
-              <text x="636" y="456">Events</text>
-              <text class="method-node__detail" x="636" y="475">integration</text>
-            </g>
-            <g class="method-node" data-method-node="6">
-              <rect x="424" y="520" width="150" height="72" />
-              <text x="436" y="546">Telemetry</text>
-              <text class="method-node__detail" x="436" y="565">logs + signals</text>
-            </g>
-
-            <circle id="method-pulse" class="method-pulse" cx="174" cy="306" r="5" />
-          </svg>
-          <figcaption>
-            A representative path, not a production topology. The point is the sequence of
-            observation.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section id="range" class="range" data-sc-act="pan" data-sc-span="3.6" aria-labelledby="range-title">
-    <div class="range__stage" data-sc-stage>
-      <div class="range__head page-shell">
-        <span class="chapter-head__folio">III</span>
-        <div class="chapter-head__title">
-          <p class="chapter-head__label">Range</p>
-          <h2 id="range-title">Different domains.<br />Shared engineering curiosity.</h2>
-        </div>
-        <p class="chapter-head__note">
-          The domain changes. The questions do not: what is the contract, what is the failure mode,
-          and what will make this easier to operate next month?
-        </p>
-      </div>
-
-      <div class="range__rail" data-sc-pan="0.08">
-        <article class="range__panel range__panel--lead">
-          <span class="range__index">{{ rangeLetters[0] }}</span>
-          <h3>Where the work happens</h3>
-          <p>
-            Backend delivery across four environments, with an emphasis on APIs, platform
-            engineering, and distributed behavior.
-          </p>
-          <div class="range__tags">
-            @for (area of profile.focusAreas; track area) {
-              <span>{{ area }}</span>
-            }
-          </div>
-        </article>
-
-        @for (sector of experienceSectors; track sector; let i = $index) {
-          <article class="range__panel">
-            <span class="range__index">{{ rangeLetters[i + 1] }}</span>
-            <h3>{{ sector }}</h3>
-            <p>{{ sectorNotes[i] }}</p>
-            <span class="range__rule" aria-hidden="true"></span>
-            <span class="range__meta">Domain {{ i + 1 }} / 4</span>
-          </article>
-        }
-
-        <article class="range__panel range__panel--end">
-          <span class="range__index">{{ rangeLetters[5] }}</span>
-          <h3>Systems and workflows</h3>
-          <div class="range__tags">
-            @for (type of systemTypes; track type) {
-              <span>{{ type }}</span>
-            }
-          </div>
-          <p>
-            The through line is not a stack. It is the habit of following a process until the
-            failure points become visible.
-          </p>
-        </article>
-      </div>
-
-      <div class="range__foot page-shell" aria-hidden="true">
-        <span>Scroll / pan</span>
-        <span>{{ rangeLetters[0] }} through {{ rangeLetters[5] }}</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="evidence" class="evidence" aria-labelledby="evidence-title">
-    <div class="page-shell">
-      <header class="chapter-head">
-        <span class="chapter-head__folio">IV</span>
-        <div class="chapter-head__title">
-          <p class="chapter-head__label">Evidence</p>
-          <h2 id="evidence-title">The numbers.<br />The record behind them.</h2>
-        </div>
-        <p class="chapter-head__note">
-          Figures are résumé-reported and describe the work as documented. They are not an
-          independent audit, and they are not the whole story.
-        </p>
-      </header>
-
-      <div class="evidence__grid">
-        <div class="evidence__numbers">
-          @for (metric of metrics; track metric.label; let i = $index) {
-            <article class="evidence__stat">
-              <span class="evidence__stat-value">
-                <span [attr.data-sc-count]="'0 ' + metric.target">{{ metric.target }}</span
-                ><span>{{ metric.suffix }}</span>
-              </span>
-              <div>
-                <h3>{{ metric.label }}</h3>
-                <p>{{ metric.note }}</p>
-              </div>
-            </article>
-          }
-          <p class="evidence__note">
-            The first figure is a résumé-reported count of core modules optimized. The percentage
-            figures describe response-time reduction and functionality coverage across client
-            environments.
-          </p>
-        </div>
-
-        <div class="evidence__ledger">
-          <div class="ledger__head">
-            <span>Experience</span>
-            <span>2023 / Present</span>
-          </div>
-          @for (position of experience; track position.company + position.role) {
-            <article class="ledger__item">
-              <div class="ledger__item-head">
-                <div>
-                  <h3>{{ position.role }}</h3>
-                  <p>{{ position.company }} / {{ position.location }}</p>
-                </div>
-                <span>{{ position.start }} to {{ position.end }}</span>
-              </div>
-              <p>{{ position.summary }}</p>
-            </article>
-          }
-
-          <div class="ledger__head">
-            <span>Education</span>
-            <span>2023</span>
-          </div>
-          @for (item of education; track item.institution) {
-            <article class="ledger__item">
-              <div class="ledger__item-head">
-                <div>
-                  <h3>{{ item.credential }}</h3>
-                  <p>{{ item.institution }} / {{ item.location }}</p>
-                </div>
-                <span>{{ item.graduation }}</span>
-              </div>
-            </article>
-          }
-
-          <div class="ledger__head">
-            <span>Capabilities</span>
-            <span>Tooling</span>
-          </div>
-          @for (group of capabilities; track group.id) {
-            <article class="ledger__item ledger__item--capability">
-              <h3>{{ group.title }}</h3>
-              <p>{{ group.summary }}</p>
-              <div class="ledger__tags">
-                @for (item of group.items; track item) {
-                  <span>{{ item }}</span>
-                }
-              </div>
-            </article>
-          }
         </div>
       </div>
-    </div>
-  </section>
 
-  <section id="contact" class="close" aria-labelledby="contact-title">
-    <div class="page-shell close__grid">
-      <div class="close__mark" aria-hidden="true">V</div>
-      <div class="close__copy">
-        <p class="chapter-head__label">Close / Contact</p>
-        <h2 id="contact-title">Have a system that needs a closer look?</h2>
-        <p>
-          I am open to backend engineering work where the interesting part is making the whole
-          system easier to reason about.
-        </p>
-        <p class="close__email">
-          <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
-        </p>
-        <div class="close__actions">
-          <button class="action action--solid" type="button" (click)="copyEmail()">
-            Copy email
-          </button>
-          <a class="action" [href]="profile.resumeUrl" download>Download résumé</a>
-          <a class="action" [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
-            >LinkedIn <span aria-hidden="true">&#8599;</span></a
-          >
+      <div class="hero__aside" data-sc-in>
+        <div class="hero__avatar">
+          <app-avatar [size]="300" />
         </div>
-        @if (copyStatus()) {
-          <p class="close__status" role="status">{{ copyStatus() }}</p>
-        }
-      </div>
-
-      <nav class="close__map" aria-label="Casebook map">
-        <span class="close__map-title">Trace complete</span>
-        <ol>
-          @for (chapter of chapters; track chapter.id) {
-            <li>
-              <a [href]="'#' + chapter.id">
-                <span>{{ chapter.num }}</span>
-                {{ chapter.name }}
-              </a>
+        <ul class="hero__floats" aria-hidden="true">
+          @for (slug of heroLogos; track slug; let i = $index) {
+            <li [attr.data-i]="i">
+              <img
+                [src]="'/tech-icons/' + slug + '-original.svg'"
+                alt=""
+                width="28"
+                height="28"
+                loading="lazy"
+              />
             </li>
           }
-        </ol>
-      </nav>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero__scroll page-shell" aria-hidden="true">
+      <span class="mono">Scroll</span>
+      <span class="hero__scroll-line"></span>
+    </div>
+  </section>
+
+  <section id="about" class="section about" aria-labelledby="about-title">
+    <div class="page-shell about__grid">
+      <div class="about__aside" data-sc-in>
+        <p class="eyebrow">01 / About</p>
+        <div class="about__block">
+          <span class="mono">Focus areas</span>
+          <div class="tag-list">
+            @for (area of profile.focusAreas; track area) {
+              <span class="tag">{{ area }}</span>
+            }
+          </div>
+        </div>
+        <div class="about__block">
+          <span class="mono">Domains</span>
+          <ul class="about__sectors">
+            @for (sector of experienceSectors; track sector) {
+              <li>{{ sector }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <div class="about__copy" data-sc-in>
+        <h2 id="about-title">Curious about how things work, then how to make them better.</h2>
+        <p class="about__lead">{{ profile.shortBio }}</p>
+        <p>{{ profile.longBio }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="section stack" aria-labelledby="stack-title">
+    <div class="page-shell">
+      <div class="section-head">
+        <div class="section-head__text">
+          <p class="eyebrow">02 / Tech stack</p>
+          <h2 id="stack-title">Tools I reach for, end to end.</h2>
+          <p>
+            One shared toolbox across every system I build. Grouped by where it sits in the stack,
+            not by project.
+          </p>
+        </div>
+      </div>
+
+      <div class="stack__groups">
+        @for (group of techGroups; track group.id) {
+          <article class="stack__group" data-sc-in>
+            <header class="stack__group-head">
+              <h3>{{ group.title }}</h3>
+              <span class="mono">{{ group.items.length }} tools</span>
+            </header>
+            <p class="stack__group-note">{{ group.summary }}</p>
+            <div class="stack__items" data-sc-in data-sc-stagger="60">
+              @for (item of group.items; track item.name) {
+                <span class="tech-chip">
+                  @if (item.slug) {
+                    <img
+                      class="tech-chip__logo"
+                      [src]="'/tech-icons/' + item.slug + '-original.svg'"
+                      [alt]="item.name + ' logo'"
+                      width="22"
+                      height="22"
+                      loading="lazy"
+                    />
+                  } @else {
+                    <span class="tech-chip__mark" aria-hidden="true">{{ item.mark }}</span>
+                  }
+                  {{ item.name }}
+                </span>
+              }
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section work" aria-labelledby="work-title">
+    <div class="page-shell">
+      <div class="section-head">
+        <div class="section-head__text">
+          <p class="eyebrow">03 / Work</p>
+          <h2 id="work-title">Systems I've shipped.</h2>
+          <p>Five builds across four domains. Each one opens the full case study.</p>
+        </div>
+        <span class="section-index">{{ projects.length }} systems</span>
+      </div>
+
+      <div class="work__grid">
+        @for (project of projects; track project.slug; let i = $index) {
+          <a class="work-card" [routerLink]="['/work', project.slug]" data-sc-in>
+            <div class="work-card__top">
+              <span class="work-card__index mono">0{{ i + 1 }}</span>
+              <span class="work-card__cat">{{ project.category }}</span>
+            </div>
+            <h3 class="work-card__title">{{ project.name }}</h3>
+            <p class="work-card__lead">{{ project.oneLiner }}</p>
+            <span class="work-card__cta"
+              >Read case study <span aria-hidden="true">&#8594;</span></span
+            >
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="journey" class="section journey" aria-labelledby="journey-title">
+    <div class="page-shell">
+      <div class="section-head">
+        <div class="section-head__text">
+          <p class="eyebrow">04 / Journey</p>
+          <h2 id="journey-title">From classroom to production.</h2>
+          <p>Gamer first, engineer after. The path that led to backend work.</p>
+        </div>
+      </div>
+
+      <ol class="timeline">
+        @for (step of timeline; track step.title) {
+          <li class="timeline__item" [class.is-current]="step.current" data-sc-in>
+            <span class="timeline__node" aria-hidden="true"></span>
+            <div class="timeline__card">
+              <span class="timeline__when mono">{{ step.when }}</span>
+              <h3>{{ step.title }}</h3>
+              <p class="timeline__org">{{ step.org }}</p>
+              <p class="timeline__detail">{{ step.detail }}</p>
+              @if (step.stack.length) {
+                <div class="tag-list">
+                  @for (tag of step.stack; track tag) {
+                    <span class="tag">{{ tag }}</span>
+                  }
+                </div>
+              }
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="stats" class="section stats" aria-labelledby="stats-title">
+    <div class="page-shell stats__grid">
+      <aside class="player-card" data-sc-in aria-label="Developer profile card">
+        <div class="player-card__top">
+          <app-avatar [size]="96" />
+          <div>
+            <span class="mono player-card__level">LVL. SOFTWARE ENGINEER</span>
+            <h3>{{ profile.name }}</h3>
+            <p>{{ profile.title }}</p>
+          </div>
+        </div>
+        <dl class="player-card__facts">
+          @for (fact of cardFacts; track fact.key) {
+            <div>
+              <dt>{{ fact.key }}</dt>
+              <dd>{{ fact.value }}</dd>
+            </div>
+          }
+        </dl>
+      </aside>
+
+      <div class="stats__blocks">
+        <p class="eyebrow">05 / By the numbers</p>
+        <h2 id="stats-title" class="stats__title">Real figures, no filler.</h2>
+        <div class="stats__inner">
+          @for (stat of playerStats; track stat.label) {
+            <article class="stat" data-sc-in>
+              <span class="stat__value"
+                ><span [attr.data-sc-count]="'0 ' + stat.target">{{ stat.target }}</span
+                ><span>{{ stat.suffix }}</span></span
+              >
+              <h3>{{ stat.label }}</h3>
+              <p>{{ stat.note }}</p>
+            </article>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact" aria-labelledby="contact-title">
+    <div class="page-shell contact__inner" data-sc-in>
+      <p class="eyebrow">06 / Contact</p>
+      <h2 id="contact-title">Have a system that needs a closer look?</h2>
+      <p class="contact__lede">
+        I'm open to backend engineering work where the interesting part is making the whole system
+        easier to reason about.
+      </p>
+      <div class="contact__actions">
+        <a class="button button--primary" [href]="'mailto:' + profile.email"
+          >Email me <span aria-hidden="true">&#8599;</span></a
+        >
+        <button class="button" type="button" (click)="copyEmail()">Copy email</button>
+        <a class="button button--ghost" [href]="profile.resumeUrl" download>Download résumé</a>
+      </div>
+      @if (copyStatus()) {
+        <p class="contact__status" role="status">{{ copyStatus() }}</p>
+      }
+      <div class="contact__socials">
+        <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
+          >GitHub <span aria-hidden="true">&#8599;</span></a
+        >
+        <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
+          >LinkedIn <span aria-hidden="true">&#8599;</span></a
+        >
+        <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
+      </div>
     </div>
   </section>
 </div>

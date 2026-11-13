@@ -53,6 +53,61 @@
                 "glob": "**/*",
                 "input": "src/files",
                 "output": "files"
+              },
+              {
+                "glob": "csharp-original.svg",
+                "input": "node_modules/devicon/icons/csharp",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "dot-net-original.svg",
+                "input": "node_modules/devicon/icons/dot-net",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "entityframeworkcore-original.svg",
+                "input": "node_modules/devicon/icons/entityframeworkcore",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "apachekafka-original.svg",
+                "input": "node_modules/devicon/icons/apachekafka",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "postgresql-original.svg",
+                "input": "node_modules/devicon/icons/postgresql",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "microsoftsqlserver-original.svg",
+                "input": "node_modules/devicon/icons/microsoftsqlserver",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "docker-original.svg",
+                "input": "node_modules/devicon/icons/docker",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "jenkins-original.svg",
+                "input": "node_modules/devicon/icons/jenkins",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "git-original.svg",
+                "input": "node_modules/devicon/icons/git",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "angular-original.svg",
+                "input": "node_modules/devicon/icons/angular",
+                "output": "tech-icons"
+              },
+              {
+                "glob": "google-original.svg",
+                "input": "node_modules/devicon/icons/google",
+                "output": "tech-icons"
               }
             ],
             "styles": [
@@ -73,8 +128,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "18kB",
-                  "maximumError": "22kB"
+                  "maximumWarning": "24kB",
+                  "maximumError": "32kB"
                 }
               ],
               "outputHashing": "all"
