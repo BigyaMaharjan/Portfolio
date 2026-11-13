@@ -1,6 +1,6 @@
 <section class="case-page page-wrap" aria-labelledby="case-title">
   @if (project(); as item) {
-    <a class="back-link" routerLink="/" fragment="work">&#8592; All work</a>
+    <a class="back-link" routerLink="/" fragment="systems">&#8592; All work</a>
     <header class="case-hero">
       <p class="eyebrow">
         {{ item.eyebrow }} <span aria-hidden="true">·</span> {{ item.category }}
@@ -42,10 +42,7 @@
             } @else {
               <span
                 class="store-link store-link--pending"
-                [attr.aria-label]="
-                  storeLink.platform +
-                  'https://play.google.com/store/apps/details?id=com.mventus.ncell.activity&hl=en'
-                "
+                [attr.aria-label]="storeLink.platform + ' store listing link pending'"
                 >{{ storeLink.platform }} <small>Link pending</small></span
               >
             }
@@ -56,7 +53,7 @@
 
     <div class="case-grid">
       <section class="case-section">
-        <p class="eyebrow">01 / Context</p>
+        <p class="eyebrow">I / Context</p>
         <h2>Challenge</h2>
         <p>{{ item.context }}</p>
         <p>{{ item.problem }}</p>
@@ -65,7 +62,7 @@
         }
       </section>
       <section class="case-section case-section--wide">
-        <p class="eyebrow">02 / System design</p>
+        <p class="eyebrow">II / System design</p>
         <h2>Architecture</h2>
         <p>{{ item.architecture }}</p>
         <figure class="architecture-figure">
@@ -128,7 +125,7 @@
         </figure>
       </section>
       <section class="case-section">
-        <p class="eyebrow">03 / Trade-offs</p>
+        <p class="eyebrow">III / Trade-offs</p>
         <h2>Engineering decisions</h2>
         @if (item.decisions.length > 0) {
           @for (decision of item.decisions; track decision.title) {
@@ -145,12 +142,12 @@
         }
       </section>
       <section class="case-section">
-        <p class="eyebrow">04 / Delivery</p>
+        <p class="eyebrow">IV / Delivery</p>
         <h2>Execution</h2>
         <p>{{ item.execution }}</p>
       </section>
       <section class="case-section case-section--wide">
-        <p class="eyebrow">05 / Evidence</p>
+        <p class="eyebrow">V / Evidence</p>
         <h2>Outcomes</h2>
         @if (item.outcomes.length > 0) {
           <div class="case-outcomes">
@@ -171,13 +168,13 @@
       </section>
       @if (item.lessons) {
         <section class="case-section">
-          <p class="eyebrow">06 / Reflection</p>
+          <p class="eyebrow">VI / Reflection</p>
           <h2>Lessons</h2>
           <p>{{ item.lessons }}</p>
         </section>
       }
       <section class="case-section">
-        <p class="eyebrow">{{ item.lessons ? '07' : '06' }} / Tools</p>
+        <p class="eyebrow">{{ item.lessons ? 'VII' : 'VI' }} / Tools</p>
         <h2>Stack</h2>
         <div class="tag-list">
           @for (tag of item.stack.slice(0, 5); track tag) {
@@ -214,7 +211,7 @@
         Project details are only shown once they're ready to share. Nothing has been filled with
         placeholder employers, metrics, or architecture claims.
       </p>
-      <a class="button button--primary" routerLink="/" fragment="work"
+      <a class="button button--primary" routerLink="/" fragment="systems"
         >Back to selected work <span aria-hidden="true">&#8594;</span></a
       >
     </div>

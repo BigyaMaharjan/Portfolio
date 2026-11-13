@@ -16,7 +16,7 @@ export const profile: Profile = {
     linkedin: 'https://www.linkedin.com/in/bigya-maharjan-b7441b299/',
   },
   heroMetrics: [
-    { value: '15+', label: 'core .NET modules optimized', note: 'Resume-reported' },
+    { value: '15+', label: 'core .NET modules optimized', note: 'Résumé-reported' },
     { value: '20%', label: 'reduction in response times', note: 'Across core module optimization' },
     {
       value: '30%',

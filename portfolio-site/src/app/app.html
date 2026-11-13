@@ -1,6 +1,6 @@
 <a class="skip-link" href="#main-content">Skip to content</a>
 
-<header class="site-header" [class.is-compact]="compactHeader()">
+<header class="site-header">
   <div class="site-header__inner">
     <a class="brand" routerLink="/" aria-label="Bigya Maharjan home" (click)="closeMenu()">
       <span class="brand__monogram" aria-hidden="true">BM</span>
@@ -39,9 +39,9 @@
       [class.is-open]="menuOpen()"
       aria-label="Primary navigation"
     >
-      <a routerLink="/" fragment="work" (click)="closeMenu()">Work</a>
-      <a routerLink="/" fragment="experience" (click)="closeMenu()">Experience</a>
-      <a routerLink="/" fragment="about" (click)="closeMenu()">About</a>
+      <a routerLink="/" fragment="systems" (click)="closeMenu()">Systems</a>
+      <a routerLink="/" fragment="method" (click)="closeMenu()">Method</a>
+      <a routerLink="/" fragment="evidence" (click)="closeMenu()">Evidence</a>
       <a routerLink="/resume" (click)="closeMenu()">Résumé</a>
       <button
         class="theme-toggle"
@@ -74,7 +74,7 @@
   <div class="site-footer__inner">
     <div class="footer-identity">
       <a class="footer-name" routerLink="/">{{ profile.name }}</a>
-      <p>{{ profile.title }} <span aria-hidden="true">·</span> {{ profile.location }}</p>
+      <p>{{ profile.title }} <span aria-hidden="true">/</span> {{ profile.location }}</p>
     </div>
     <div class="footer-socials" aria-label="Social profiles">
       <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
