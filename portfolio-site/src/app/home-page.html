@@ -12,21 +12,11 @@
           <a class="button button--primary" href="#work"
             >See my work <span aria-hidden="true">&#8595;</span></a
           >
-          <a class="button button--ghost" [href]="profile.resumeUrl" download
-            >Download résumé <span aria-hidden="true">&#8599;</span></a
-          >
         </div>
         <div class="hero__meta">
           <span class="hero__badge">
             <span class="hero__dot" aria-hidden="true"></span>{{ profile.availability }}
           </span>
-          <div class="hero__socials" aria-label="Contact links">
-            <a [href]="'mailto:' + profile.email">Email</a>
-            <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
-              >LinkedIn</a
-            >
-          </div>
         </div>
       </div>
 
@@ -259,7 +249,6 @@
         <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
           >LinkedIn <span aria-hidden="true">&#8599;</span></a
         >
-        <a [href]="'mailto:' + profile.email">{{ profile.email }}</a>
       </div>
     </div>
   </section>

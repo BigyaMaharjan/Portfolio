@@ -5,8 +5,10 @@
   <span class="aurora__blob aurora__blob--b"></span>
   <span class="aurora__blob aurora__blob--c"></span>
   <span class="aurora__grid"></span>
-  <span class="aurora__glow"></span>
+  <span class="aurora__noise"></span>
 </div>
+
+<div class="cursor-orb" aria-hidden="true"></div>
 
 <header class="site-header">
   <div class="site-header__inner">
@@ -51,7 +53,6 @@
       <a routerLink="/" fragment="stack" (click)="closeMenu()">Stack</a>
       <a routerLink="/" fragment="work" (click)="closeMenu()">Work</a>
       <a routerLink="/" fragment="journey" (click)="closeMenu()">Journey</a>
-      <a routerLink="/resume" (click)="closeMenu()">Résumé</a>
       <button
         class="theme-toggle"
         type="button"
@@ -73,6 +74,7 @@
       >
     </nav>
   </div>
+  <span #scrollProgress class="site-header__progress" aria-hidden="true"></span>
 </header>
 
 <main id="main-content" tabindex="-1">
@@ -85,23 +87,7 @@
       <a class="footer-name" routerLink="/">{{ profile.name }}</a>
       <p>{{ profile.title }} <span aria-hidden="true">/</span> {{ profile.location }}</p>
     </div>
-    <div class="footer-socials" aria-label="Social profiles">
-      <a [href]="profile.social.github" target="_blank" rel="noopener noreferrer"
-        >GitHub <span aria-hidden="true">&#8599;</span></a
-      >
-      <a [href]="profile.social.linkedin" target="_blank" rel="noopener noreferrer"
-        >LinkedIn <span aria-hidden="true">&#8599;</span></a
-      >
-    </div>
     <div class="footer-controls">
-      <button
-        class="footer-control"
-        type="button"
-        [attr.aria-pressed]="motionPreference.reducedMotion()"
-        (click)="motionPreference.toggle()"
-      >
-        {{ motionPreference.reducedMotion() ? 'Reduced motion on' : 'Reduce motion' }}
-      </button>
       <a class="back-to-top" href="#main-content"
         >Back to top <span aria-hidden="true">&#8593;</span></a
       >
