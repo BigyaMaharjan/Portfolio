@@ -3,10 +3,10 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    title: 'Bigya Maharjan | Backend Software Developer',
+    title: 'Bigya Maharjan | Software Developer',
     data: {
       description:
-        'Backend software developer in Kathmandu, Nepal. Building and improving .NET systems across banking, telecom, government, and SaaS.',
+        'Software developer in Kathmandu, Nepal. Building and improving .NET systems across banking, telecom, government, and SaaS.',
     },
     loadComponent: () => import('./home-page').then((module) => module.HomePage),
   },
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {
     path: 'resume',
     title: 'Résumé | Bigya Maharjan',
-    data: { description: 'Résumé for Bigya Maharjan, Backend Software Developer.' },
+    data: { description: 'Résumé for Bigya Maharjan, Software Developer.' },
     loadComponent: () => import('./resume-page').then((module) => module.ResumePage),
   },
   {

@@ -178,11 +178,11 @@ export class App implements AfterViewInit {
     const caseStudy = project ? projects.find((item) => item.slug === project) : undefined;
     const pageTitle = caseStudy
       ? `${caseStudy.name} | Case Study | ${profile.name}`
-      : (route.title ?? 'Bigya Maharjan | Backend Software Developer');
+      : (route.title ?? 'Bigya Maharjan | Software Developer');
     const description =
       caseStudy?.oneLiner ??
       (route.data['description'] as string) ??
-      'Bigya Maharjan is a backend software developer building systems with C# and .NET.';
+      'Bigya Maharjan is a software developer building systems with C# and .NET.';
     const canonicalPath = url.split(/[?#]/, 1)[0] || '/';
     const canonicalUrl = new URL(canonicalPath, window.location.origin).href;
 

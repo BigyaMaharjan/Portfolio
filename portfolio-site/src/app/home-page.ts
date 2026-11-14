@@ -86,7 +86,7 @@ export class HomePage implements AfterViewInit, OnDestroy {
   ] as const;
 
   readonly cardFacts = [
-    { key: 'Class', value: 'Backend Engineer' },
+    { key: 'Class', value: 'Backend Developer' },
     { key: 'Guild', value: 'AMNIL Technologies' },
     { key: 'Server', value: profile.location },
     { key: 'Status', value: profile.availability },
