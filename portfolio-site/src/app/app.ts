@@ -1,9 +1,11 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
   HostListener,
+  NgZone,
   ViewChild,
   effect,
   inject,
@@ -13,7 +15,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Meta, Title } from '@angular/platform-browser';
 import { filter } from 'rxjs';
-import { MotionPreferenceService } from './core/motion-preference.service';
 import { ThemePreferenceService } from './core/theme-preference.service';
 import { profile } from './data/profile.data';
 import { projects } from './data/projects.data';
@@ -25,26 +26,30 @@ import { projects } from './data/projects.data';
   styleUrl: './app.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
+export class App implements AfterViewInit {
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly zone = inject(NgZone);
   private readonly pageTitle = inject(Title);
   private readonly meta = inject(Meta);
   readonly themePreference = inject(ThemePreferenceService);
-  readonly motionPreference = inject(MotionPreferenceService);
   readonly profile = profile;
   readonly menuOpen = signal(false);
   readonly currentYear = new Date().getFullYear();
   private readonly pointerFine = window.matchMedia('(pointer: fine)').matches;
+  private progressFrame = 0;
 
   @ViewChild('primaryNav') private primaryNav?: ElementRef<HTMLElement>;
   @ViewChild('menuButton') private menuButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('scrollProgress') private scrollProgress?: ElementRef<HTMLElement>;
+
+  private readonly onScroll = (): void => this.scheduleProgress();
 
   constructor() {
     effect(() => {
       this.meta.updateTag({
         name: 'theme-color',
-        content: this.themePreference.theme() === 'dark' ? '#070912' : '#f5f7ff',
+        content: this.themePreference.theme() === 'dark' ? '#0a0e1f' : '#eef1ff',
       });
     });
 
@@ -58,7 +63,24 @@ export class App {
         this.closeMenu();
         this.updatePageMetadata(event.urlAfterRedirects);
         this.scrollToFragment(event.urlAfterRedirects);
+        this.scheduleProgress();
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.zone.runOutsideAngular(() => {
+      window.addEventListener('scroll', this.onScroll, { passive: true });
+      window.addEventListener('resize', this.onScroll, { passive: true });
+    });
+    this.updateProgress();
+
+    this.destroyRef.onDestroy(() => {
+      window.removeEventListener('scroll', this.onScroll);
+      window.removeEventListener('resize', this.onScroll);
+      if (this.progressFrame) {
+        cancelAnimationFrame(this.progressFrame);
+      }
+    });
   }
 
   @HostListener('document:pointermove', ['$event'])
@@ -123,6 +145,28 @@ export class App {
     if (returnFocus) {
       setTimeout(() => this.menuButton?.nativeElement.focus(), 0);
     }
+  }
+
+  private scheduleProgress(): void {
+    if (this.progressFrame) {
+      return;
+    }
+
+    this.progressFrame = requestAnimationFrame(() => {
+      this.progressFrame = 0;
+      this.updateProgress();
+    });
+  }
+
+  private updateProgress(): void {
+    const element = this.scrollProgress?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    element.style.transform = `scaleX(${ratio.toFixed(4)})`;
   }
 
   private updatePageMetadata(url: string): void {

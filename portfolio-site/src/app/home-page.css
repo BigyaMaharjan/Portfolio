@@ -91,30 +91,6 @@
   }
 }
 
-.hero__socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 18px;
-}
-
-.hero__socials a {
-  border-bottom: 1px solid transparent;
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition:
-    color var(--duration-ui) ease,
-    border-color var(--duration-ui) ease;
-}
-
-.hero__socials a:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
 .hero__aside {
   position: relative;
   display: grid;
