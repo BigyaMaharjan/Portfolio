@@ -62,7 +62,6 @@ export class App implements AfterViewInit {
       .subscribe((event) => {
         this.closeMenu();
         this.updatePageMetadata(event.urlAfterRedirects);
-        this.scrollToFragment(event.urlAfterRedirects);
         this.scheduleProgress();
       });
   }
@@ -195,22 +194,5 @@ export class App implements AfterViewInit {
     document
       .querySelector<HTMLLinkElement>('link[rel="canonical"]')
       ?.setAttribute('href', canonicalUrl);
-  }
-
-  private scrollToFragment(url: string): void {
-    const fragment = url.split('#')[1];
-    if (!fragment) {
-      return;
-    }
-
-    setTimeout(() => {
-      const target = document.getElementById(decodeURIComponent(fragment));
-      if (!target) {
-        return;
-      }
-
-      const targetTop = target.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'instant' });
-    }, 0);
   }
 }

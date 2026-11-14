@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
           }
         },
       }),
-      withInMemoryScrolling({ anchorScrolling: 'disabled', scrollPositionRestoration: 'enabled' }),
+      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
     ),
   ],
 };
